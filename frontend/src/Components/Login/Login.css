@@ -1,0 +1,61 @@
+.register-container {
+    display: flex;
+    height: 100vh;
+    background-image: url('src/imagem-estoque.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.register-form {
+    width: 400px;
+    height: auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.register-form h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #3b3b3b;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 10px;
+    font-size: 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    outline: none;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4B31FF;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-link a {
+    color: #4B31FF;
+    text-decoration: none;
+    font-weight: bold;
+}
