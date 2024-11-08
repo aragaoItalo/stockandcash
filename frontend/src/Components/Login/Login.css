@@ -1,61 +1,102 @@
-.register-container {
+.login-container {
     display: flex;
-    height: 100vh;
-    background-image: url('src/imagem-estoque.png');
-    background-size: cover;
-    background-position: center;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    width: 100%; 
+    background-color: #f4f4f4; 
 }
+ 
 
-.register-form {
-    width: 400px;
-    height: auto;
-    padding: 40px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    margin-left: auto;
-    margin-right: 20px;
+.login-box {
+    width: 100%; 
+    max-width: 400px; 
+    padding: 40px; 
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 20px; 
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); 
 }
+ 
 
-.register-form h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 24px;
-    color: #3b3b3b;
+.login-form {
+    text-align: center; 
 }
-
-.input-group {
-    position: relative;
-    margin-bottom: 20px;
+ 
+.login-header {
+    margin-bottom: 30px; 
+    font-size: 32px; 
+    font-family: Verdana, Geneva, sans-serif; 
+    color: #6a3dff; 
+    text-shadow: 0px 0px 5px rgba(106, 61, 255, 0.8); 
 }
+ 
 
-.input-group input {
-    width: 100%;
-    padding: 10px 10px;
-    font-size: 14px;
-    border: 2px solid #e0e0e0;
-    border-radius: 5px;
-    outline: none;
+.input-field {
+    position: relative; 
+    margin-bottom: 20px; 
+    display: flex;
+    align-items: center; 
 }
+ 
+.input-field input {
+    width: 100%; 
+    padding: 10px 10px 10px 30px; 
+    font-size: 14px; 
+    border: 2px solid #6d6d6d9f; 
+    border-radius: 15px; 
+    outline: none; 
+    position: relative; 
+}
+ 
+.input-field .icon {
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0a0a0;
+    font-size: 18px; 
+}
+ 
 
-.register-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #4B31FF;
+.button-login {
+    width: 100%; 
+    padding: 10px; 
+    background-color: #4B31FF; 
     color: #fff;
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    margin-top: 20px;
+    font-size: 16px;
 }
+ 
 
-.login-link {
-    text-align: center;
-    margin-top: 20px;
+.signup-link {
+    text-align: center; 
+    margin-top: 20px; 
 }
+ 
+.signup-link a {
+    color: #4B31FF; 
+    text-decoration: none; 
+    font-weight: bold; 
+}
+ 
 
-.login-link a {
-    color: #4B31FF;
-    text-decoration: none;
-    font-weight: bold;
+@media (max-width: 600px) {
+    .login-container {
+        flex-direction: column; /
+    }
+ 
+    .login-box {
+        width: 100%; 
+        max-width: none;
+    }
+ 
+    .login-form {
+        padding: 20px; 
+    }
+ 
+    .signup-link {
+        margin-top: 10px;
+    }
 }
