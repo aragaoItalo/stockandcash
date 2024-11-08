@@ -1,11 +1,10 @@
 // src/App.js
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Dashboard from './Components/Dashboard/dashboard';
 import AdicionarProduto from './Components/adicionarProduto/cadastroProdutos';
-import Estoque from './Components/Stock/Estoque';
+import Estoque from './Components/Estoque/Estoque';
 
 
 const App = () => {

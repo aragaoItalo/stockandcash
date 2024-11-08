@@ -57,99 +57,95 @@ const Register = () => {
 
     return (
         <div className="register-container">
-          <div className="register-form">
-            <h1>Registro</h1>
-            <form onSubmit={handleRegister}>
-              <div className="input-group">
-                <FaUser className="icon" />
-                <input
-                  type="text"
-                  placeholder="Nome"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  required
-                />
-              </div>
-     
-              <div className="input-group">
-                <FaUser className="icon" />
-                <input
-                  type="text"
-                  placeholder="Sobrenome"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  required
-                />
-              </div>
-     
-              <div className="input-group">
-                <FaEnvelope className="icon" />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-     
-              <div className="input-group">
-                <FaEnvelope className="icon" />
-                <input
-                  type="email"
-                  placeholder="Confirmar Email"
-                  value={confirmEmail}
-                  onChange={(e) => setConfirmEmail(e.target.value)}
-                  required
-                />
-              </div>
-     
-              <div className="input-group">
-                <FaStore className="icon" />
-                <input
-                  type="text"
-                  placeholder="Nome da Loja"
-                  value={storeName}
-                  onChange={(e) => setStoreName(e.target.value)}
-                  required
-                />
-              </div>
-     
-              <div className="input-group">
-                <FaLock className="icon" />
-                <input
-                  type="password"
-                  placeholder="Senha"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-     
-              <div className="input-group">
-                <FaLock className="icon" />
-                <input
-                  type="password"
-                  placeholder="Confirmar Senha"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                />
-              </div>
-     
-              <button type="submit" className="register-btn">Registrar</button>
-            </form>
-     
-            <div className="login-link">
-              <p>Já tem uma conta? <a href="/login">Faça login!</a></p>
+            <div className="register-form">
+                <h1 className="register-header">STOCK&CASH</h1>
+                <form onSubmit={handleRegister}>
+                    <div className="input-field">
+                        <FaUser className="icon" />
+                        <input
+                            type="text"
+                            placeholder="Nome"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
+                        <div className='input-sobrenome'>
+                        <FaUser className="icon" />
+                        <input 
+                            type="text"
+                            placeholder="Sobrenome"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                        />
+                        </div>
+                    </div>
+
+                    <div className="input-field">
+                        <FaEnvelope className="icon" />
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="input-field">
+                        <FaEnvelope className="icon" />
+                        <input
+                            type="email"
+                            placeholder="Confirmar Email"
+                            value={confirmEmail}
+                            onChange={(e) => setConfirmEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="input-field">
+                        <FaStore className="icon" />
+                        <input
+                            type="text"
+                            placeholder="Nome da Loja"
+                            value={storeName}
+                            onChange={(e) => setStoreName(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="input-field">
+                        <FaLock className="icon" />
+                        <input
+                            type="password"
+                            placeholder="Senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="input-field">
+                        <FaLock className="icon" />
+                        <input
+                            type="password"
+                            placeholder="Confirmar Senha"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <button type="submit" className="register-btn">Registrar</button>
+                </form>
+
+                <div className="register-link">
+                    <p>Já tem uma conta? <a href="/login">Faça login!</a></p>
+                </div>
             </div>
-          </div>
-     
-          <div className="register-image">
-            <img src="src/assets/estoque.png" alt="registro" />
-          </div>
+
         </div>
-      );
+    );
 };
 
 export default Register;
