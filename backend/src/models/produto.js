@@ -16,14 +16,14 @@ const Produto = sequelize.define('Produto', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    estoque: {
+    quantidade: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
+    }/*,
     imagem: {
         type: DataTypes.STRING,
         allowNull: true
-    }
+    }*/
 });
 
 //RELACIONAR PRODUTO X FORNECEDOR
