@@ -1,14 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Estoque.css';
+import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDollarSign, faHome, faList, faClipboard, faCalendarAlt, faCog, faPlus, faTrash, faEdit, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const Estoque = () => {
   const [products, setProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const navigate = useNavigate();
+
+  // Função para abrir o modal
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Função para fechar o modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -22,10 +34,6 @@ const Estoque = () => {
 
     fetchProducts();
   }, []);
-
-  const handleAddProduct = () => {
-    navigate('/adicionarProduto');
-  };
 
   const handleEditProduct = () => {
     if (selectedProducts.length === 1) {
@@ -81,7 +89,7 @@ const Estoque = () => {
         <div className="header">
           <h1>Gerenciamento de Produtos</h1>
           <div className="buttons">
-            <button onClick={handleAddProduct}>
+            <button onClick={openModal}>
               <FontAwesomeIcon icon={faPlus} />
               Adicionar produtos
             </button>
@@ -133,6 +141,16 @@ const Estoque = () => {
           </tbody>
         </table>
       </div>
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <AdicionarProduto />  {/* Exibe o formulário de Adicionar Produto */}
+            <button className="close-modal-btn" onClick={closeModal}>
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

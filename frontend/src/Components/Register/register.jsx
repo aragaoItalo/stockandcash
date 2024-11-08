@@ -1,5 +1,5 @@
 // src/Components/Register/Register.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaStore, FaLock } from 'react-icons/fa';
 import './Register.css';

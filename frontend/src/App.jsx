@@ -5,6 +5,8 @@ import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Dashboard from './Components/Dashboard/dashboard';
 import AdicionarProduto from './Components/adicionarProduto/cadastroProdutos';
+import Estoque from './Components/Stock/Estoque';
+
 
 const App = () => {
     return (
@@ -13,8 +15,9 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/adicionar-produto" element={<AdicionarProduto />} />
+                <Route path="/adicionarProduto" element={<AdicionarProduto />} />
                 <Route path="*" element={<Navigate to="/login" replace />} />
+                <Route path="/Estoque" element={<Estoque />} />
             </Routes>
         </Router>
     );
