@@ -1,11 +1,41 @@
-import React from 'react';
-import './cadastroProdutos.css'; // Certifique-se de que o arquivo CSS está no caminho correto
+import React, { useState } from 'react';
+import './cadastroProdutos.css';
 
 function AdicionarProduto() {
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [desconto, setDesconto] = useState('');
+  const [quantidade, setQuantidade] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [descricao, setDescricao] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica para enviar os dados ou fazer algo com os dados do formulário
-    alert('Produto cadastrado com sucesso!');
+
+    const novoProduto = {
+      nome,
+      preco,
+      desconto,
+      quantidade,
+      categoria,
+      descricao
+    };
+
+    fetch('http://localhost:5000/api/produtos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(novoProduto),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert('Produto cadastrado com sucesso!');
+      })
+      .catch((error) => {
+        console.error('Erro ao cadastrar o produto:', error);
+        alert('Erro ao cadastrar o produto. Tente novamente!');
+      });
   };
 
   return (
@@ -15,51 +45,79 @@ function AdicionarProduto() {
       <form className="produto-form" onSubmit={handleSubmit}>
         <div className="left-section">
           <div className="upload-box">
-            <i className="fas fa-upload"></i>
+            <i className="faz fa-upload"></i>
           </div>
           <div className="upload-buttons">
-            <button><i className="fas fa-upload"></i></button>
-            <button><i className="fas fa-upload"></i></button>
-            <button><i className="fas fa-upload"></i></button>
+            <button><i className="faz fa-upload"></i></button>
+            <button><i className="faz fa-upload"></i></button>
+            <button><i className="faz fa-upload"></i></button>
           </div>
         </div>
 
         <div className="right-section">
           <div className="input-group">
             <label>Nome do Produto</label>
-            <input type="text" placeholder="Nome do Produto" />
+            <input
+              type="text"
+              placeholder="Nome do Produto"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
           </div>
 
           <div className="input-group-row">
             <div className="input-group">
               <label>Preço: R$</label>
-              <input type="text" placeholder="Preço" />
+              <input
+                type="text"
+                placeholder="Preço"
+                value={preco}
+                onChange={(e) => setPreco(e.target.value)}
+              />
             </div>
             <div className="input-group">
               <label>Desconto: %</label>
-              <input type="text" placeholder="Desconto" />
+              <input
+                type="text"
+                placeholder="Desconto"
+                value={desconto}
+                onChange={(e) => setDesconto(e.target.value)}
+              />
             </div>
           </div>
 
           <div className="input-group-row">
             <div className="input-group">
               <label>Quantidade</label>
-              <input type="text" placeholder="Quantidade" />
+              <input
+                type="text"
+                placeholder="Quantidade"
+                value={quantidade}
+                onChange={(e) => setQuantidade(e.target.value)}
+              />
             </div>
           </div>
 
           <div className="input-group">
             <label>Categoria</label>
-            <select>
+            <select
+              value={categoria}
+              onChange={(e) => setCategoria(e.target.value)}
+            >
               <option value="">Selecione a Categoria</option>
-              <option value="1">Categoria 1</option>
-              <option value="2">Categoria 2</option>
+              <option value="1">Bebida</option>
+              <option value="2">Comida</option>
+              <option value="3">Outros</option>
             </select>
           </div>
 
           <div className="input-group">
             <label>Descrição</label>
-            <textarea placeholder="Descrição do Produto"></textarea>
+            <textarea
+              placeholder="Descrição do Produto"
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
+            ></textarea>
           </div>
 
           <button type="submit" className="confirm-button">Confirmar Cadastro</button>
