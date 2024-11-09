@@ -1,12 +1,13 @@
 .dashboard-sidebar {
-    width: 80px; /* Ajusta a largura da sidebar conforme a imagem anterior */
-    background-color: #3b0b57; /* Cor de fundo semelhante à da imagem */
-    height: 100vh; /* Ocupa toda a altura da tela */
+    width: 120px; /* Ajusta a largura da sidebar conforme a imagem anterior */
+    background-color: #d3d3d3; /* Cor de fundo semelhante à da imagem */
+    height: 95.8vh; /* Ocupa toda a altura da tela */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Distribui o espaço entre os elementos */
     align-items: center; /* Centraliza horizontalmente */
     padding: 20px 0;
+    box-shadow: 5px 0px 10px #3333335d;
 }
 
 .dashboard-items {
@@ -27,15 +28,32 @@
 .sidebar-logo {
     width: 50px; /* Ajuste a largura da logo para se adequar à barra lateral */
     margin-bottom: 30px;
+    position: relative;
+    top: 20px;
+}
+
+.fa-plus-icon {
+    color: #6a3dff;
+    position: relative;
+    top: -15px;
+    padding: 10px 10px 10px 10px;
+    border: 3px #6a3dff solid;
+    border-radius: 100px;
+}
+
+.fa-cog-icon {
+    position: relative;
+    top: -40px;
 }
 
 .sidebar-button {
     background: none;
     border: none;
-    color: #ffffff; /* Cor dos ícones */
+    color: #4b4b4b; /* Cor dos ícones */
     font-size: 24px;
     cursor: pointer;
-    margin: 20px 0; /* Ajusta o espaçamento entre os botões */
+    margin: 20px 0px; /* Ajusta o espaçamento entre os botões */
+    margin-top: 60px;
     display: flex;
     justify-content: center; /* Centraliza os ícones */
     align-items: center;
@@ -43,7 +61,7 @@
 }
 
 .sidebar-button:hover {
-    color: #3498db; /* Cor ao passar o mouse */
+    color: #6a3dff; /* Cor ao passar o mouse */
 }
 
 /* Estilizando o popup */

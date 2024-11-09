@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaPlus, FaHome, FaListUl, FaClipboard, FaCog } from 'react-icons/fa';
 import AdicionarProduto from '../adicionarProduto/cadastroProdutos';  // Importar o componente de AdicionarProduto
 import './Dashboard.css';
@@ -39,7 +39,7 @@ const Dashboard = () => {
             </li>
             <li>
               <button className="sidebar-button" onClick={openModal}>
-                <FaPlus /> {/* Ícone de Adicionar Produto */}
+                <FaPlus className="fa-plus-icon" /> {/* Ícone de Adicionar Produto */}
               </button>
             </li>
             <li>
@@ -61,7 +61,7 @@ const Dashboard = () => {
         </div>
         <div className="dashboard-footer">
           <button className='sidebar-button' onClick={togglePopup}>
-            <FaCog />
+            <FaCog className="fa-cog-icon" />
           </button>
           <div className={`popup ${isPopupVisible ? 'show' : 'hide'}`}>
             <p onClick={handleLogout}>Sair da Conta</p>
