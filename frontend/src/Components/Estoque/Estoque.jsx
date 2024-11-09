@@ -10,6 +10,9 @@ const Estoque = () => {
   const [products, setProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [productToEdit, setProductToEdit] = useState(null);
+
   const navigate = useNavigate();
 
   // Função para abrir o modal
@@ -39,7 +42,9 @@ const Estoque = () => {
     if (selectedProducts.length === 1) {
       const productToEdit = products.find((product) => product.id === selectedProducts[0]);
       if (productToEdit) {
-        navigate(`/adicionarProduto/${productToEdit.id}`);
+        setProductToEdit(productToEdit);
+        setIsEditing(true);
+        openModal();
       }
     } else {
       alert('Selecione apenas um produto para editar.');
@@ -144,7 +149,11 @@ const Estoque = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <AdicionarProduto />  {/* Exibe o formulário de Adicionar Produto */}
+            <AdicionarProduto 
+              product={isEditing ? productToEdit : null}
+              isEditing={isEditing}
+              onClose={closeModal}
+            />  
             <button className="close-modal-btn" onClick={closeModal}>
               Fechar
             </button>

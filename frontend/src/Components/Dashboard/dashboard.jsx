@@ -6,6 +6,8 @@ import './Dashboard.css';
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);  // Controla a exibição do modal
   const [isPopupVisible, setPopupVisible] = useState(false); // Controlar o popup de logout
+  const [isEditing, setIsEditing] = useState(false);
+  const [productToEdit, setProductToEdit] = useState(null);
 
   // Função para abrir o modal
   const openModal = () => {
@@ -73,7 +75,11 @@ const Dashboard = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <AdicionarProduto />  {/* Exibe o formulário de Adicionar Produto */}
+            <AdicionarProduto 
+              product={isEditing ? productToEdit : null}
+              isEditing={isEditing}
+              onClose={closeModal}
+            />  {/* Exibe o formulário de Adicionar Produto */}
             <button className="close-modal-btn" onClick={closeModal}>
               Fechar
             </button>
