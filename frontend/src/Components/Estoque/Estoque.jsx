@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Estoque.css';
 import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDollarSign, faHome, faList, faClipboard, faCalendarAlt, faCog, faPlus, faTrash, faEdit, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FaPlus, FaHome, FaListUl, FaClipboard, FaCog, FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
 import { useNavigate } from 'react-router-dom';
 
 const Estoque = () => {
@@ -12,6 +12,7 @@ const Estoque = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,6 +24,22 @@ const Estoque = () => {
   // Função para fechar o modal
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  // Função para exibir ou esconder o popup
+  const togglePopup = () => {
+    setIsPopupVisible(!isPopupVisible);
+  };
+
+  // Função de logout
+  const handleLogout = () => {
+    console.log('Logout');
+    navigate('/login');
+  };
+
+  // Função para navegar até a página de estoque
+  const handleGoToEstoque = () => {
+    navigate('/estoque');  // Redireciona para a página de estoque
   };
 
   useEffect(() => {
@@ -82,34 +99,68 @@ const Estoque = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <div className="sidebar">
-        <FontAwesomeIcon icon={faDollarSign} className="plus-icon" />
-        <FontAwesomeIcon icon={faHome} />
-        <FontAwesomeIcon icon={faList} />
-        <FontAwesomeIcon icon={faClipboard} />
-        <FontAwesomeIcon icon={faCalendarAlt} />
-        <FontAwesomeIcon icon={faCog} />
+      {/* Sidebar */}
+      <div className="dashboard-sidebar">
+        <div className="dashboard-items">
+          <ul className='dash-list'>
+            <li>
+              <a href="#!">
+                <img src="src/assets/logo.png" alt="Logo" className='sidebar-logo' />
+              </a>
+            </li>
+            <li>
+              <button className="sidebar-button" onClick={openModal}>
+                <FaPlus className="fa-plus-icon" /> {/* Ícone de Adicionar Produto */}
+              </button>
+            </li>
+            <li>
+              <button className='sidebar-button' onClick={handleGoToEstoque}>
+                <FaHome /> {/* Ícone para voltar para o Estoque */}
+              </button>
+            </li>
+            <li>
+              <button className='sidebar-button'>
+                <FaListUl />
+              </button>
+            </li>
+            <li>
+              <button className='sidebar-button'>
+                <FaClipboard />
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div className="dashboard-footer">
+          <button className='sidebar-button' onClick={togglePopup}>
+            <FaCog className="fa-cog-icon" />
+          </button>
+          <div className={`popup ${isPopupVisible ? 'show' : 'hide'}`}>
+            <p onClick={handleLogout}>Sair da Conta</p>
+          </div>
+        </div>
       </div>
+
+      {/* Content */}
       <div className="content">
         <div className="header">
           <h1>Gerenciamento de Produtos</h1>
           <div className="buttons">
             <button onClick={openModal}>
-              <FontAwesomeIcon icon={faPlus} />
+              <FaPlus />
               Adicionar produtos
             </button>
             <button onClick={handleDeleteProduct}>
-              <FontAwesomeIcon icon={faTrash} />
+              <FaTrash />
               Excluir produtos
             </button>
             <button onClick={handleEditProduct}>
-              <FontAwesomeIcon icon={faEdit} />
+              <FaEdit />
               Editar produtos
             </button>
           </div>
           <div className="filter">
             <span>Filtrar</span>
-            <FontAwesomeIcon icon={faChevronDown} />
+            <FaChevronDown />
           </div>
         </div>
         <table className="product-table">
@@ -146,6 +197,8 @@ const Estoque = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Modal */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -153,7 +206,7 @@ const Estoque = () => {
               product={isEditing ? productToEdit : null}
               isEditing={isEditing}
               onClose={closeModal}
-            />  
+            />
             <button className="close-modal-btn" onClick={closeModal}>
               Fechar
             </button>
