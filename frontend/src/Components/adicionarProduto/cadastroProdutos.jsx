@@ -138,7 +138,7 @@ function AdicionarProduto() {
             ></textarea>
           </div>
 
-          <button type="submit" className="confirm-button">Confirmar Cadastro</button>
+          <button type="submit" className="confirm-button">Registrar Produto</button>
         </div>
       </form>
     </div>
