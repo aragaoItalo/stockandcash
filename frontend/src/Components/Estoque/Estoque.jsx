@@ -143,7 +143,7 @@ const Estoque = () => {
       {/* Content */}
       <div className="content">
         <div className="header">
-          <h1>Gerenciamento de Produtos</h1>
+          <h1>Estoque</h1>
           <div className="buttons">
             <button onClick={openModal}>
               <FaPlus />
@@ -171,7 +171,7 @@ const Estoque = () => {
               <th>Nome do Produto</th>
               <th>Categoria</th>
               <th>Preço</th>
-              <th>Estoque</th>
+              <th>Quantidade</th>
             </tr>
           </thead>
           <tbody>
@@ -184,14 +184,14 @@ const Estoque = () => {
                     onChange={() => handleCheckboxChange(product.id)}
                   />
                 </td>
-                <td>
+                {/*<td>
                   <img alt={product.nome} src={product.imagem} />
-                </td>
+                </td>*/}
                 <td>{product.id}</td>
                 <td>{product.nome}</td>
                 <td>{product.categoria}</td>
                 <td>{product.preco}</td>
-                <td>{product.estoque}</td>
+                <td>{product.quantidade}</td>
               </tr>
             ))}
           </tbody>
