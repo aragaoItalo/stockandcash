@@ -12,25 +12,43 @@ function AdicionarProduto() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!nome || !preco || !quantidade || !descricao) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+
     const novoProduto = {
       nome,
-      preco,
-      desconto,
-      quantidade,
+      preco:parseFloat(preco),
+      desconto:parseFloat(desconto),
+      quantidade:parseInt(quantidade,10),
       categoria,
       descricao
     };
 
-    fetch('http://localhost:5000/api/produtos', {
+    fetch('http://localhost:3000/api/produtos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(novoProduto),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Erro ao cadastrar o produto');
+        }
+        return response.json();
+    })
       .then((data) => {
-        alert('Produto cadastrado com sucesso!');
+        console.log('Produto cadastrado:', data);
+        alert(`Produto "${data.nome}" cadastrado com sucesso!`);
+        // Limpar os campos do formulário
+        setNome('');
+        setPreco('');
+        setDesconto('');
+        setQuantidade('');
+        setCategoria('');
+        setDescricao('');
       })
       .catch((error) => {
         console.error('Erro ao cadastrar o produto:', error);

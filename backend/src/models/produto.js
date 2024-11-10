@@ -8,16 +8,24 @@ const Produto = sequelize.define('Produto', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    descricao: {
-        type: DataTypes.TEXT,
-        allowNull: false
-    },
     preco: {
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    desconto: {
+        type: DataTypes.FLOAT,
+        allowNull: true
+    },
     quantidade: {
         type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    categoria: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    descricao: {
+        type: DataTypes.TEXT,
         allowNull: false
     }/*,
     imagem: {
@@ -27,9 +35,9 @@ const Produto = sequelize.define('Produto', {
 });
 
 //RELACIONAR PRODUTO X FORNECEDOR
-Produto.belongsTo(Fornecedor, {
-    foreignKey: 'fornecedorID'
-});
+//Produto.belongsTo(Fornecedor, {
+//    foreignKey: 'fornecedorID'
+//});
 
 
 module.exports = Produto;
