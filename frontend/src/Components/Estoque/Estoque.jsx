@@ -45,7 +45,7 @@ const Estoque = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/produtos');
+        const response = await axios.get('http://localhost:3000/produtos');
         setProducts(response.data);
       } catch (error) {
         console.error('Erro ao buscar produtos:', error);
@@ -78,7 +78,7 @@ const Estoque = () => {
       const confirmed = window.confirm(`Você tem certeza que deseja excluir o produto com ID ${id}?`);
       if (confirmed) {
         try {
-          await axios.delete(`http://localhost:3000/api/produtos/${id}`);
+          await axios.delete(`http://localhost:3000/produtos/${id}`);
           setProducts(products.filter((product) => product.id !== id));
         } catch (error) {
           console.error(`Erro ao excluir o produto com ID ${id}:`, error);
@@ -115,7 +115,7 @@ const Estoque = () => {
             </li>
             <li>
               <button className='sidebar-button' onClick={handleGoToEstoque}>
-                <FaHome /> {/* Ícone para voltar para o Estoque */}
+                <FaHome />
               </button>
             </li>
             <li>
