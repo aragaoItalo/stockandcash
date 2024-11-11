@@ -1,0 +1,32 @@
+/* ResumoEstoqueCard.css */
+
+.resumo-estoque-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    position: relative;
+    left: 280px;
+    bottom: 400px;
+    box-shadow: 0px 0px 20px 5px #5555555e ;
+  }
+  
+  .resumo-estoque-card h5 {
+    position: relative;
+    bottom: 62px;
+    margin-bottom: 12px;
+    font-size: 0.8rem;
+    color: #777777;
+  }
+  
+  .resumo-conteudo p {
+    margin: 8px 0;
+    font-size: 0.9rem;
+    color: #555;
+    position: relative;
+    top: -25px;
+    padding: 5px;
+  }
+  
