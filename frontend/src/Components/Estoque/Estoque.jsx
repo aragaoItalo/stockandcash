@@ -5,6 +5,7 @@ import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FaPlus, FaHome, FaListUl, FaClipboard, FaCog, FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
 import { useNavigate } from 'react-router-dom';
+import Sidebar from '../Sidebar/sidebar';
 
 const Estoque = () => {
   const [products, setProducts] = useState([]);
@@ -75,13 +76,16 @@ const Estoque = () => {
     }
     // Confirmação de exclusão
     for (let id of selectedProducts) {
-      const confirmed = window.confirm(`Você tem certeza que deseja excluir o produto com ID ${id}?`);
-      if (confirmed) {
-        try {
-          await axios.delete(`http://localhost:3000/produtos/${id}`);
-          setProducts(products.filter((product) => product.id !== id));
-        } catch (error) {
-          console.error(`Erro ao excluir o produto com ID ${id}:`, error);
+      const productToDelete = products.find((product) => product.id === id);
+      if (productToDelete) {
+        const confirmed = window.confirm(`Você tem certeza que deseja excluir o produto "${productToDelete.nome}" com ID ${id}?`);
+        if (confirmed) {
+          try {
+            await axios.delete(`http://localhost:3000/produtos/${id}`);
+            setProducts(products.filter((product) => product.id !== id));
+          } catch (error) {
+            console.error(`Erro ao excluir o produto "${productToDelete.nome}" com ID ${id}:`, error);
+          }
         }
       }
     }
@@ -100,44 +104,8 @@ const Estoque = () => {
   return (
     <div style={{ display: 'flex' }}>
       {/* Sidebar */}
-      <div className="dashboard-sidebar">
-        <div className="dashboard-items">
-          <ul className='dash-list'>
-            <li>
-              <a href="#!">
-                <img src="src/assets/logo.png" alt="Logo" className='sidebar-logo' />
-              </a>
-            </li>
-            <li>
-              <button className="sidebar-button" onClick={openModal}>
-                <FaPlus className="fa-plus-icon" /> {/* Ícone de Adicionar Produto */}
-              </button>
-            </li>
-            <li>
-              <button className='sidebar-button' onClick={handleGoToEstoque}>
-                <FaHome />
-              </button>
-            </li>
-            <li>
-              <button className='sidebar-button'>
-                <FaListUl />
-              </button>
-            </li>
-            <li>
-              <button className='sidebar-button'>
-                <FaClipboard />
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div className="dashboard-footer">
-          <button className='sidebar-button' onClick={togglePopup}>
-            <FaCog className="fa-cog-icon" />
-          </button>
-          <div className={`popup ${isPopupVisible ? 'show' : 'hide'}`}>
-            <p onClick={handleLogout}>Sair da Conta</p>
-          </div>
-        </div>
+      <div>
+        <Sidebar />
       </div>
 
       {/* Content */}
