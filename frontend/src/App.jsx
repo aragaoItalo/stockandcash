@@ -6,6 +6,7 @@ import Dashboard from './Components/Dashboard/dashboard';
 import AdicionarProduto from './Components/adicionarProduto/cadastroProdutos';
 import Estoque from './Components/Estoque/Estoque';
 import Sidebar from './Components/Sidebar/sidebar';
+import Fornecedores from './Components/Fornecedores/fornecedores';
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="*" element={<Navigate to="/login" replace />} />
                 <Route path="/Estoque" element={<Estoque />} />
                 <Route path="/Sidebar" element={<Sidebar />} />
+                <Route path="/Fornecedores" element={<Fornecedores />} />
             </Routes>
         </Router>
     );

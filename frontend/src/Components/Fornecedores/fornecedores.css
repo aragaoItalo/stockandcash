@@ -1,0 +1,82 @@
+
+  
+  .content {
+    padding: 20px;
+    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .header .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .header .buttons button {
+    background-color: #fff;
+    border: 2px solid #ccc; /* espessura da borda */
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .header .buttons button:hover {
+    background-color: #f0f0f0; /* cor de fundo ao passar o mouse */
+  }
+  
+  .header .buttons button i {
+    font-size: 16px;
+  }
+  
+  .header .filter {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+  
+  .header .filter i {
+    font-size: 16px;
+  }
+  
+  .product-table {
+    width: 100%; /* Largura total da tabela */
+    border-collapse: collapse; /* Remove espaçamento entre as células */
+    margin-top: 20px;
+  }
+  
+  .product-table th,
+  .product-table td {
+    padding: 15px;
+    text-align: left;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .product-table th {
+    background-color: #f9f9f9;
+    border-bottom: 2px solid #000;
+  }
+  
+  .product-table td {
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .product-table img {
+    width: 50px; 
+    height: 50px; 
+    object-fit: cover; /* Corta a imagem para caber no espaço */
+  }
