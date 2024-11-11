@@ -5,6 +5,7 @@ import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FaPlus, FaHome, FaListUl, FaClipboard, FaCog, FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
 import { useNavigate } from 'react-router-dom';
+import Sidebar from '../Sidebar/sidebar';
 
 const Estoque = () => {
   const [products, setProducts] = useState([]);
@@ -100,44 +101,8 @@ const Estoque = () => {
   return (
     <div style={{ display: 'flex' }}>
       {/* Sidebar */}
-      <div className="dashboard-sidebar">
-        <div className="dashboard-items">
-          <ul className='dash-list'>
-            <li>
-              <a href="#!">
-                <img src="src/assets/logo.png" alt="Logo" className='sidebar-logo' />
-              </a>
-            </li>
-            <li>
-              <button className="sidebar-button" onClick={openModal}>
-                <FaPlus className="fa-plus-icon" /> {/* Ícone de Adicionar Produto */}
-              </button>
-            </li>
-            <li>
-              <button className='sidebar-button' onClick={handleGoToEstoque}>
-                <FaHome />
-              </button>
-            </li>
-            <li>
-              <button className='sidebar-button'>
-                <FaListUl />
-              </button>
-            </li>
-            <li>
-              <button className='sidebar-button'>
-                <FaClipboard />
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div className="dashboard-footer">
-          <button className='sidebar-button' onClick={togglePopup}>
-            <FaCog className="fa-cog-icon" />
-          </button>
-          <div className={`popup ${isPopupVisible ? 'show' : 'hide'}`}>
-            <p onClick={handleLogout}>Sair da Conta</p>
-          </div>
-        </div>
+      <div>
+        <Sidebar />
       </div>
 
       {/* Content */}
