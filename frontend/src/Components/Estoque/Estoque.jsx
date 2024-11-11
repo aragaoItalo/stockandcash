@@ -74,15 +74,18 @@ const Estoque = () => {
       alert('Selecione pelo menos um produto para excluir.');
       return;
     }
-    // Confirmação de exclusão
+    // Confirmação de exclusão com nome e ID do produto
     for (let id of selectedProducts) {
-      const confirmed = window.confirm(`Você tem certeza que deseja excluir o produto com ID ${id}?`);
-      if (confirmed) {
-        try {
-          await axios.delete(`http://localhost:3000/produtos/${id}`);
-          setProducts(products.filter((product) => product.id !== id));
-        } catch (error) {
-          console.error(`Erro ao excluir o produto com ID ${id}:`, error);
+      const productToDelete = products.find((product) => product.id === id);
+      if (productToDelete) {
+        const confirmed = window.confirm(`Você tem certeza que deseja excluir o produto "${productToDelete.nome}" com ID ${id}?`);
+        if (confirmed) {
+          try {
+            await axios.delete(`http://localhost:3000/produtos/${id}`);
+            setProducts(products.filter((product) => product.id !== id));
+          } catch (error) {
+            console.error(`Erro ao excluir o produto com ID ${id}:`, error);
+          }
         }
       }
     }
