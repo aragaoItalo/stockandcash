@@ -76,16 +76,13 @@ const Estoque = () => {
     }
     // Confirmação de exclusão
     for (let id of selectedProducts) {
-      const productToDelete = products.find((product) => product.id === id);
-      if (productToDelete) {
-        const confirmed = window.confirm(`Você tem certeza que deseja excluir o produto "${productToDelete.nome}" com ID ${id}?`);
-        if (confirmed) {
-          try {
-            await axios.delete(`http://localhost:3000/produtos/${id}`);
-            setProducts(products.filter((product) => product.id !== id));
-          } catch (error) {
-            console.error(`Erro ao excluir o produto "${productToDelete.nome}" com ID ${id}:`, error);
-          }
+      const confirmed = window.confirm(`Você tem certeza que deseja excluir o produto com ID ${id}?`);
+      if (confirmed) {
+        try {
+          await axios.delete(`http://localhost:3000/produtos/${id}`);
+          setProducts(products.filter((product) => product.id !== id));
+        } catch (error) {
+          console.error(`Erro ao excluir o produto com ID ${id}:`, error);
         }
       }
     }
@@ -104,9 +101,8 @@ const Estoque = () => {
   return (
     <div style={{ display: 'flex' }}>
       {/* Sidebar */}
-      <div>
-        <Sidebar />
-      </div>
+      
+      <Sidebar />
 
       {/* Content */}
       <div className="content">
