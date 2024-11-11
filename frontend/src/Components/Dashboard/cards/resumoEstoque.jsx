@@ -1,7 +1,5 @@
-// ResumoEstoqueCard.jsx
-
 import React from 'react';
-import './css/resumoEstoque.css'; // Importando o arquivo de estilos
+import './resumoEstoque.css';
 
 const ResumoEstoque = () => {
   return (
