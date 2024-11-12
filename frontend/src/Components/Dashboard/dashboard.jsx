@@ -62,7 +62,8 @@ const Dashboard = () => {
               product={isEditing ? productToEdit : null}
               isEditing={isEditing}
               onClose={closeModal}
-            />  {/* Exibe o formulário de Adicionar Produto */}
+              onSave={handleUpdateProduct}
+            />  
             <button className="close-modal-btn" onClick={closeModal}>
               Fechar
             </button>

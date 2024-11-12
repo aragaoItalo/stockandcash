@@ -8,6 +8,8 @@ import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
 const Sidebar = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [productToEdit, setProductToEdit] = useState(null);
   const navigate = useNavigate();
 
   // Função para abrir o modal
@@ -85,7 +87,12 @@ const Sidebar = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <AdicionarProduto onClose={closeModal} />
+            <AdicionarProduto 
+              product={isEditing ? productToEdit : null}
+              isEditing={isEditing}
+              onClose={closeModal}
+              onSave={handleUpdateProduct}
+            />
             <button className="close-modal-btn" onClick={closeModal}>
               Fechar
             </button>

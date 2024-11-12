@@ -69,6 +69,30 @@ const Estoque = () => {
     }
   };
 
+  const handleUpdateProduct = async (produtoAtualizado) => {
+    try {
+      await axios.put(`http://localhost:3000/produtos/${produtoAtualizado.id}`, produtoAtualizado);
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === produtoAtualizado.id ? produtoAtualizado : product
+        )
+      );
+
+      setSelectedProducts((prevSelectedProducts) =>
+        prevSelectedProducts.filter((id) => id !== produtoAtualizado.id)
+      );
+
+      closeModal();
+      setIsEditing(false);
+      setProductToEdit(null);
+    } catch (error) {
+      console.error('Erro ao atualizar o produto:', error);
+      if(isEditing) {
+        alert('Erro ao atualizar o produto. Tente novamente.');
+      }
+    }
+  };
+
   const handleDeleteProduct = async () => {
     if (selectedProducts.length === 0) {
       alert('Selecione pelo menos um produto para excluir.');
@@ -173,6 +197,7 @@ const Estoque = () => {
               product={isEditing ? productToEdit : null}
               isEditing={isEditing}
               onClose={closeModal}
+              onSave={handleUpdateProduct}
             />
             <button className="close-modal-btn" onClick={closeModal}>
               Fechar

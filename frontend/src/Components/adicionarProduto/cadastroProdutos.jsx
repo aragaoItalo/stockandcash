@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import './cadastroProdutos.css';
 
-function AdicionarProduto() {
-  const [nome, setNome] = useState('');
-  const [preco, setPreco] = useState('');
-  const [desconto, setDesconto] = useState('');
-  const [quantidade, setQuantidade] = useState('');
-  const [categoria, setCategoria] = useState('');
-  const [descricao, setDescricao] = useState('');
+function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
+  const [nome, setNome] = useState(product?.nome || '');
+  const [preco, setPreco] = useState(product?.preco || '');
+  const [desconto, setDesconto] = useState(product?.desconto || '');
+  const [quantidade, setQuantidade] = useState(product?.quantidade || '');
+  const [categoria, setCategoria] = useState(product?.categoria || '');
+  const [descricao, setDescricao] = useState(product?.descricao || '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,49 +16,59 @@ function AdicionarProduto() {
       alert('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
-
-    const novoProduto = {
+    
+    const produtoAtualizado = {
+      id: product?.id,
       nome,
-      preco:parseFloat(preco),
-      desconto:parseFloat(desconto),
-      quantidade:parseInt(quantidade,10),
+      preco: parseFloat(preco),
+      desconto: parseFloat(desconto),
+      quantidade: parseInt(quantidade, 10),
       categoria,
-      descricao
+      descricao,
     };
+    
+    onSave(product);
+    onClose();
 
-    fetch('http://localhost:3000/produtos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(novoProduto),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Erro ao cadastrar o produto');
-        }
-        return response.json();
-    })
-      .then((data) => {
-        console.log('Produto cadastrado:', data);
-        alert(`Produto "${data.nome}" cadastrado com sucesso!`);
-        // Limpar os campos do formulário
-        setNome('');
-        setPreco('');
-        setDesconto('');
-        setQuantidade('');
-        setCategoria('');
-        setDescricao('');
+    if (isEditing) {
+      onSave(produtoAtualizado);
+      onClose();
+    } else {
+      // adicionando produto
+      fetch('http://localhost:3000/produtos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(produtoAtualizado),
       })
-      .catch((error) => {
-        console.error('Erro ao cadastrar o produto:', error);
-        alert('Erro ao cadastrar o produto. Tente novamente!');
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Erro ao cadastrar o produto');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log('Produto cadastrado:', data);
+          alert(`Produto "${data.nome}" cadastrado com sucesso!`);
+          setNome('');
+          setPreco('');
+          setDesconto('');
+          setQuantidade('');
+          setCategoria('');
+          setDescricao('');
+          onClose();
+        })
+        .catch((error) => {
+          console.error('Erro ao cadastrar o produto:', error);
+          alert('Erro ao cadastrar o produto. Tente novamente!');
+        });
+    }
   };
-
+  
   return (
     <div className="adicionar-produto">
-      <h2>Adicionar Produto</h2>
+      <h2>{isEditing ? 'Editar Produto' : 'Adicionar Produto'}</h2>
 
       <form className="produto-form" onSubmit={handleSubmit}>
         <div className="left-section">
@@ -138,7 +148,9 @@ function AdicionarProduto() {
             ></textarea>
           </div>
 
-          <button type="submit" className="confirm-button">Registrar Produto</button>
+          <button type="submit" className="confirm-button">
+            {isEditing ? 'Salvar Alterações' : 'Registrar Produto'}
+          </button>
         </div>
       </form>
     </div>
