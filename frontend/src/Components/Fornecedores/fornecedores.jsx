@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './fornecedores.css';
-import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
+import AdicionarFornecedor from '../adicionarfornecedores/AdicionarFornecedor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FaPlus, FaHome, FaListUl, FaClipboard, FaCog, FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
 import { useNavigate } from 'react-router-dom';
@@ -166,7 +166,7 @@ const Fornecedores = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <AdicionarProduto 
+            <AdicionarFornecedor
               product={isEditing ? productToEdit : null}
               isEditing={isEditing}
               onClose={closeModal}

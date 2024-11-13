@@ -1,0 +1,120 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fundo escuro com transparência */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: #fdfdfd;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 450px; /* Diminuiu o tamanho máximo do modal */
+    width: 90%; /* Permite que ele fique um pouco menor em telas menores */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+  }
+  
+  .confirm-button {
+    background-color: #6a3dff;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .confirm-button:hover {
+    background-color: #5631cf;
+  }
+  
+  .close-modal-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transition: background-color 0.3s;
+  }
+  
+  .close-modal-btn:hover {
+    background-color: #e53935;
+  }
+  
+  /* Estilos do formulário */
+  .adicionar-fornecedor {
+    font-family: Arial, sans-serif;
+  }
+  
+  .fornecedor-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-top: 10px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+  }
+  
+  .input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+  
+  .input-group input:focus {
+    border-color: #6a3dff;
+    outline: none;
+  }
+  
+  /* Cabeçalho e subtítulo */
+  h2 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  h3 {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 0;
+  }
+  
+  /* Customização de Tooltip para campos opcionais */
+  .optional {
+    font-size: 0.8em;
+    color: #888;
+  }
+  
