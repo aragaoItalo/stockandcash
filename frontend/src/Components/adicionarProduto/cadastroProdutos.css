@@ -1,179 +1,195 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Cor de fundo com transparência */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 700px;
-    width: 100%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
-  
-  .confirm-button {
-    background-color: #6a3dff;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    width: 80%;
-    margin-top: 20px;
-  }
-  
-  .confirm-button:hover {
-    background-color: #5631cf;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Cor de fundo com transparência */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;           /* Diminuir a largura do formulário */
+  max-width: 600px;     /* Ajustar a largura máxima */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;   /* Manter o botão de fechar posicionado dentro do modal */
+}
+
+.confirm-button {
+  background-color: #6a3dff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 80%;
+  margin-top: 20px;
+}
+
+.confirm-button:hover {
+  background-color: #5631cf;
+}
+
+/* Modificações no botão de fechar */
+.close-modal-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  position: absolute;  /* Posicionando o botão dentro do modal */
+  top: 10px;           /* Distância do topo do modal */
+  right: 10px;         /* Distância da direita do modal */
+  z-index: 2000;       /* Garante que o botão fique acima de outros elementos dentro do modal */
+  font-size: 16px;     /* Tamanho da fonte */
+}
+
+.close-modal-btn:hover {
+  background-color: #e53935;
+  color: #f0f0f0;
+}
+
+/* Responsividade do botão de fechar */
+@media (max-width: 768px) {
   .close-modal-btn {
-    background-color: #f44336;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-    margin-top: 10px;
-    position: relative;
-    top: -73vh;
-    right: -85vh;
+    top: 15px;  /* Ajusta para telas menores */
+    right: 15px; /* Ajusta para telas menores */
+    font-size: 14px; /* Ajusta o tamanho da fonte */
+    padding: 4px 8px; /* Ajusta o padding */
   }
-  
-  .close-modal-btn:hover {
-    background-color: #e53935;
+
+  .modal-content {
+    width: 95%; /* Aumenta a largura do modal em telas pequenas */
+    max-width: 500px; /* Ajusta a largura máxima para telas pequenas */
   }
-  
-  /* Restante do estilo do formulário */
-  .adicionar-produto {
-    text-align: center;
-  }
-  
-  .produto-form {
-    display: flex;
-  }
-  
-  .left-section {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: 25px;
-    align-items: center;
-  }
-  
-  .upload-box {
-    width: 150px;
-    height: 150px;
-    border: 2px dashed #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .upload-box i {
-    font-size: 30px;
-    color: #888;
-  }
-  
-  .upload-buttons button {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    background-color: #f0f0f0;
-  }
-  
-  .right-section {
-    width: 65%;
-    padding-left: 20px;
-  }
-  
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    padding-right: 35px;
-    margin-bottom: 10px;
-    
-  }
-  
-  .input-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .input-group input,
-  .input-group textarea,
-  .input-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .input-group-row {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .input-group-row .input-group {
-    width: 48%;
-  }
-  
-  textarea {
-    height: 80px;
-  }
-  
-  .variante-group {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .variante-group input {
-    width: 22%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .add-variante {
-    background-color: #6A0DAD;
-    color: white;
-    padding: 10px;
-    border-radius: 50%;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-    display: block;
-    margin: 10px auto 0;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  h3 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .optional {
-    font-size: 0.8em;
-    color: #888;
-  }
-  
+}
+
+/* Restante do estilo do formulário */
+.adicionar-produto {
+  text-align: center;
+}
+
+.produto-form {
+  display: flex;
+}
+
+.left-section {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 25px;
+  align-items: center;
+}
+
+.upload-box {
+  width: 150px;
+  height: 150px;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.upload-box i {
+  font-size: 30px;
+  color: #888;
+}
+
+.upload-buttons button {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+}
+
+.right-section {
+  width: 65%;
+  padding-left: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  padding-right: 35px;
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-group-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-group-row .input-group {
+  width: 48%;
+}
+
+textarea {
+  height: 80px;
+}
+
+.variante-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.variante-group input {
+  width: 22%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-variante {
+  background-color: #6A0DAD;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin: 10px auto 0;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.optional {
+  font-size: 0.8em;
+  color: #888;
+}

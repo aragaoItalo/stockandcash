@@ -1,29 +1,150 @@
+/* Estilo do corpo da página */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo da sidebar */
+.dashboard-sidebar {
+  height: 105vh;
+  width: 80px;
+  background-color: #f0f0f0;
+
+}
+
+/* Estilo do logo na sidebar */
+.sidebar-logo {
+  width: 50px; /* Defina o tamanho adequado para o logo */
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+/* Estilo para os itens da sidebar */
+.dashboard-items {
+  flex: 1;
+}
+
+.dash-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dash-list li {
+ margin-top: -10px ;
+}
+
+.sidebar-btn{
+  border: none; 
+  cursor: pointer;
+  background-color: transparent;;
+}
+.sidebar-button {
   
-  .sidebar {
-    width: 80px;
-    background-color: #f0f0f0;
-    padding: 20px 0;
-  }
-  
-  .sidebar i {
-    font-size: 24px;
-    margin: 20px 0;
-    color: #555;
-  }
-  
-  .sidebar .plus-icon {
-    font-size: 32px;
-    color: #6a0dad;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -20px;
+}
+
+.sidebar i {
+  font-size: 24px;
+  color: #555;
+}
+
+/* Estilo dos ícones */
+.sidebar .fa-plus-icon {
+  font-size: 32px;
+  color: #6a0dad;
+}
+
+.sidebar .fa-cog-icon {
+  font-size: 24px;
+  color: #555;
+}
+
+/* Estilo para a área de rodapé da sidebar */
+.dashboard-footer {
+  text-align: center;
+}
+
+/* Estilo do popup que aparece ao clicar no ícone de configurações */
+.popup {
+  display: none;
+  position: absolute;
+  top: 90%;
+  left: 10%;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.popup.show {
+  display: block;
+}
+
+.popup.hide {
+  display: none;
+}
+
+.popup p {
+  margin: 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.popup p:hover {
+  color: #6a0dad;
+}
+
+/* Estilo do modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+}
+
+.close-modal-btn {
+  border: none;
+  background-color: transparent;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Ajustes para responsividade */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    width: 60px;
   }
 
-.sidebar-btn {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+  .dashboard-footer {
+    text-align: center;
+  }
 }
-  

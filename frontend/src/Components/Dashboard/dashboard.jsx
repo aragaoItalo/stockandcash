@@ -52,24 +52,6 @@ const Dashboard = () => {
             <ResumoEstoque />
       </div>
         
-
-
-      {/* Modal Adicionar Produto */}
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <AdicionarProduto 
-              product={isEditing ? productToEdit : null}
-              isEditing={isEditing}
-              onClose={closeModal}
-              onSave={handleUpdateProduct}
-            />  
-            <button className="close-modal-btn" onClick={closeModal}>
-              Fechar
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
