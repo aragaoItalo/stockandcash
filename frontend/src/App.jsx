@@ -7,7 +7,7 @@ import AdicionarProduto from './Components/adicionarProduto/cadastroProdutos';
 import Estoque from './Components/Estoque/Estoque';
 import Sidebar from './Components/Sidebar/sidebar';
 import Fornecedores from './Components/Fornecedores/fornecedores';
-import AdicionarFornecedores from './Components/adicionarfornecedores/AdicionarFornecedor';
+import AdicionarFornecedores from './Components/adicionarFornecedores/cadastroFornecedor';
 
 const App = () => {
     return (
@@ -20,8 +20,8 @@ const App = () => {
                 <Route path="*" element={<Navigate to="/login" replace />} />
                 <Route path="/Estoque" element={<Estoque />} />
                 <Route path="/Sidebar" element={<Sidebar />} />
-                <Route path="/Fornecedores" element={<Fornecedores />} />
-                <Route path="/AdicionarFornecedores" element={<AdicionarFornecedores />} />
+                <Route path="/fornecedores" element={<Fornecedores />} />
+                <Route path="/adicionarFornecedores" element={<AdicionarFornecedores />} />
             </Routes>
         </Router>
     );
