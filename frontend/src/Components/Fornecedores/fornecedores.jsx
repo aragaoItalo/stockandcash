@@ -127,7 +127,7 @@ const Fornecedores = () => {
             <FaChevronDown />
           </div>
         </div>
-        <table className="product-table">
+        <table className="fornecedor-table">
           <thead>
             <tr>
               <th></th>
@@ -164,14 +164,14 @@ const Fornecedores = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="modal-overlay-fornecedores">
+          <div className="modal-content-fornecedores">
             <AdicionarFornecedor
               product={isEditing ? productToEdit : null}
               isEditing={isEditing}
               onClose={closeModal}
             />
-            <button className="close-modal-btn" onClick={closeModal}>
+            <button className="close-modal-btn-fornecedores" onClick={closeModal}>
               Fechar
             </button>
           </div>

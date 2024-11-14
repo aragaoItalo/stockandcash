@@ -67,7 +67,7 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
     <div className="adicionar-fornecedor">
       <h2>{isEditing ? 'Editar Fornecedor' : 'Adicionar Fornecedor'}</h2>
       <form className="fornecedor-form" onSubmit={handleSubmit}>
-        <div className="input-group">
+        <div className="input-group-fornecedor">
           <label>Nome</label>
           <input
             type="text"
@@ -75,9 +75,11 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
             value={nome}
             onChange={(e) => setNome(e.target.value)}
           />
+
+          
         </div>
         
-        <div className="input-group">
+        <div className="input-group-fornecedor">
           <label>Endereço</label>
           <input
             type="text"
@@ -87,7 +89,7 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
           />
         </div>
 
-        <div className="input-group">
+        <div className="input-group-fornecedor">
           <label>CNPJ</label>
           <input
             type="text"
@@ -97,7 +99,7 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
           />
         </div>
 
-        <div className="input-group">
+        <div className="input-group-fornecedor">
           <label>Email</label>
           <input
             type="email"
@@ -107,7 +109,7 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
           />
         </div>
 
-        <div className="input-group">
+        <div className="input-group-fornecedor">
           <label>Telefone</label>
           <input
             type="text"
@@ -117,17 +119,9 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
           />
         </div>
 
-        <div className="input-group">
-          <label>Produtos</label>
-          <input
-            type="text"
-            placeholder="Produtos fornecidos"
-            value={produtos}
-            onChange={(e) => setProdutos(e.target.value)}
-          />
-        </div>
+        
 
-        <button type="submit" className="confirm-button">
+        <button type="submit" className="confirm-button-fornecedor">
           {isEditing ? 'Salvar Alterações' : 'Registrar Fornecedor'}
         </button>
       </form>

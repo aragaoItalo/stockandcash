@@ -1,4 +1,4 @@
-.modal-overlay {
+.modal-overlay-fornecedores {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,18 +11,18 @@
     z-index: 1000;
   }
   
-  .modal-content {
+  .modal-content-fornecedores {
     background: #fdfdfd;
     padding: 25px;
     border-radius: 10px;
-    max-width: 450px; /* Diminuiu o tamanho máximo do modal */
+    max-width: 470px; /* Diminuiu o tamanho máximo do modal */
     width: 90%; /* Permite que ele fique um pouco menor em telas menores */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     position: relative;
     text-align: center;
   }
   
-  .confirm-button {
+  .confirm-button-fornecedor {
     background-color: #6a3dff;
     color: white;
     padding: 12px 20px;
@@ -30,21 +30,21 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 70%;
     margin-top: 20px;
     transition: background-color 0.3s;
   }
   
-  .confirm-button:hover {
+  .confirm-button-fornecedor:hover {
     background-color: #5631cf;
   }
   
-  .close-modal-btn {
+  .close-modal-btn-fornecedores {
     background-color: #f44336;
     color: white;
     padding: 5px 10px;
     border: none;
-    border-radius: 50%;
+    border-radius: 10px;
     cursor: pointer;
     position: absolute;
     top: 15px;
@@ -69,7 +69,7 @@
     padding-top: 10px;
   }
   
-  .input-group {
+  .input-group-fornecedor {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -77,24 +77,27 @@
     text-align: left;
   }
   
-  .input-group label {
+  .input-group-fornecedor label {
     font-weight: bold;
     margin-bottom: 5px;
     font-size: 0.9rem;
     color: #333;
   }
   
-  .input-group input {
+  .input-group-fornecedor input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #7a7a7a;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     border-radius: 5px;
     font-size: 0.9rem;
     box-sizing: border-box;
     transition: border-color 0.3s;
   }
   
-  .input-group input:focus {
+  .input-group-fornecedor input:focus {
     border-color: #6a3dff;
     outline: none;
   }

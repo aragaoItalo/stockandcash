@@ -52,14 +52,14 @@
     font-size: 16px;
   }
   
-  .product-table {
+  .fornecedor-table {
     width: 100%; /* Largura total da tabela */
     border-collapse: collapse; /* Remove espaçamento entre as células */
     margin-top: 20px;
   }
   
-  .product-table th,
-  .product-table td {
+  .fornecedor-table th,
+  .fornecedor-table td {
     padding: 15px;
     text-align: left;
     border: 2px solid #ccc;

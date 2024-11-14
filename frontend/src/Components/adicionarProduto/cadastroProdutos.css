@@ -15,8 +15,8 @@
   background: #fff;
   padding: 20px;
   border-radius: 8px;
-  width: 90%;           /* Diminuir a largura do formulário */
-  max-width: 600px;     /* Ajustar a largura máxima */
+  width: 100%;           /* Diminuir a largura do formulário */
+  max-width: 700px;     /* Ajustar a largura máxima */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: relative;   /* Manter o botão de fechar posicionado dentro do modal */
 }
