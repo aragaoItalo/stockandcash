@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import './cadastroProdutos.css';
 
 function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
@@ -155,6 +156,14 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
       </form>
     </div>
   );
-}
+};
+
+// Validação das props
+AdicionarProduto.propTypes = {
+  product: PropTypes.object,
+  isEditing: PropTypes.bool,
+  onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+};
 
 export default AdicionarProduto;

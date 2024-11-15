@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Estoque.css';
 import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FaPlus, FaHome, FaListUl, FaClipboard, FaCog, FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
-import { useNavigate } from 'react-router-dom';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FaPlus, /*FaHome, FaListUl, FaClipboard, FaCog,*/ FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
+//import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/sidebar';
 
 const Estoque = () => {
@@ -13,9 +13,9 @@ const Estoque = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  //const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   // Função para abrir o modal
   const openModal = () => {
@@ -26,7 +26,7 @@ const Estoque = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+/*
   // Função para exibir ou esconder o popup
   const togglePopup = () => {
     setIsPopupVisible(!isPopupVisible);
@@ -42,7 +42,7 @@ const Estoque = () => {
   const handleGoToEstoque = () => {
     navigate('/estoque');  // Redireciona para a página de estoque
   };
-
+*/
   useEffect(() => {
     const fetchProducts = async () => {
       try {

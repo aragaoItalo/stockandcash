@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './fornecedores.css';
-import AdicionarFornecedor from '../adicionarFornecedores/cadastroFornecedor';
+import AdicionarFornecedor from './adicionarFornecedores/cadastroFornecedor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FaPlus, FaHome, FaListUl, FaClipboard, FaCog, FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
 import { useNavigate } from 'react-router-dom';
