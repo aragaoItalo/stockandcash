@@ -2,20 +2,20 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './fornecedores.css';
 import AdicionarFornecedor from './adicionarFornecedores/cadastroFornecedor';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FaPlus, FaHome, FaListUl, FaClipboard, FaCog, FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
-import { useNavigate } from 'react-router-dom';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FaPlus, /*FaHome, FaListUl, FaClipboard, FaCog,*/ FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa'; 
+//import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/sidebar';
 
 const Fornecedores = () => {
-  const [products, setProducts] = useState([]);
+  const [supplier, setSupplier] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [selectedSupplier, setSelectedSupplier] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [productToEdit, setProductToEdit] = useState(null);
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [supplierToEdit, setSupplierToEdit] = useState(null);
+  //const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   // Função para abrir o modal
   const openModal = () => {
@@ -26,7 +26,7 @@ const Fornecedores = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+/*
   // Função para exibir ou esconder o popup
   const togglePopup = () => {
     setIsPopupVisible(!isPopupVisible);
@@ -42,59 +42,83 @@ const Fornecedores = () => {
   const handleGoToEstoque = () => {
     navigate('/estoque');  // Redireciona para a página de estoque
   };
-
+*/
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchSupplier = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/produtos');
-        setProducts(response.data);
+        const response = await axios.get('http://localhost:3000/fornecedores');
+        setSupplier(response.data);
       } catch (error) {
-        console.error('Erro ao buscar produtos:', error);
+        console.error('Erro ao buscar fornecedores:', error);
       }
     };
 
-    fetchProducts();
+    fetchSupplier();
   }, []);
 
-  const handleEditProduct = () => {
-    if (selectedProducts.length === 1) {
-      const productToEdit = products.find((product) => product.id === selectedProducts[0]);
-      if (productToEdit) {
-        setProductToEdit(productToEdit);
+  const handleEditSupplier = () => {
+    if (selectedSupplier.length === 1) {
+      const supplierToEdit = supplier.find((supplier) => supplier.id === selectedSupplier[0]);
+      if (supplierToEdit) {
+        setSupplierToEdit(supplierToEdit);
         setIsEditing(true);
         openModal();
       }
     } else {
-      alert('Selecione apenas um produto para editar.');
+      alert('Selecione apenas um fornecedor para editar.');
     }
   };
 
-  const handleDeleteProduct = async () => {
-    if (selectedProducts.length === 0) {
-      alert('Selecione pelo menos um produto para excluir.');
+  const handleUpdateSupplier = async (fornecedorAtualizado) => {
+    try {
+      await axios.put(`http://localhost:3000/fornecedor/${fornecedorAtualizado.id}`, fornecedorAtualizado);
+      setSupplier((prevSupplier) =>
+        prevSupplier.map((supplier) =>
+          supplier.id === fornecedorAtualizado.id ? fornecedorAtualizado : supplier
+        )
+      );
+
+      setSelectedSupplier((prevSelectedSupplier) =>
+        prevSelectedSupplier.filter((id) => id !== fornecedorAtualizado.id)
+      );
+
+      closeModal();
+      setIsEditing(false);
+      setSupplierToEdit(null);
+    } catch (error) {
+      console.error('Erro ao atualizar o fornecedor:', error);
+      if(isEditing) {
+        alert('Erro ao atualizar o fornecedor. Tente novamente.');
+      }
+    }
+  };
+
+  const handleDeleteSupplier = async () => {
+    if (selectedSupplier.length === 0) {
+      alert('Selecione pelo menos um fornecedor para excluir.');
       return;
     }
     // Confirmação de exclusão
-    for (let id of selectedProducts) {
-      const confirmed = window.confirm(`Você tem certeza que deseja excluir o produto com ID ${id}?`);
+    for (let id of selectedSupplier) {
+      const confirmed = window.confirm(`Você tem certeza que deseja excluir o fornecedor com ID ${id}?`);
       if (confirmed) {
         try {
-          await axios.delete(`http://localhost:3000/produtos/${id}`);
-          setProducts(products.filter((product) => product.id !== id));
+          await axios.delete(`http://localhost:3000/fornecedores/${id}`);
+          setSupplier(supplier.filter((supplier) => supplier.id !== id));
         } catch (error) {
-          console.error(`Erro ao excluir o produto com ID ${id}:`, error);
+          console.error(`Erro ao excluir o fornecedor com ID ${id}:`, error);
         }
       }
     }
     // Limpa seleção após a exclusão
-    setSelectedProducts([]);
+    setSelectedSupplier([]);
   };
 
-  const handleCheckboxChange = (productId) => {
-    setSelectedProducts((prevSelected) =>
-      prevSelected.includes(productId)
-        ? prevSelected.filter((id) => id !== productId)
-        : [...prevSelected, productId]
+  const handleCheckboxChange = (supplierId) => {
+    setSelectedSupplier((prevSelected) =>
+      prevSelected.includes(supplierId)
+        ? prevSelected.filter((id) => id !== supplierId)
+        : [...prevSelected, supplierId]
     );
   };
 
@@ -113,11 +137,11 @@ const Fornecedores = () => {
               <FaPlus />
               Adicionar fornecedores
             </button>
-            <button onClick={handleDeleteProduct}>
+            <button onClick={handleDeleteSupplier}>
               <FaTrash />
               Excluir fornecedores
             </button>
-            <button onClick={handleEditProduct}>
+            <button onClick={handleEditSupplier}>
               <FaEdit />
               Editar fornecedores
             </button>
@@ -139,23 +163,23 @@ const Fornecedores = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product.id}>
+            {supplier.map((supplier) => (
+              <tr key={supplier.id}>
                 <td>
                   <input
                     type="checkbox"
-                    checked={selectedProducts.includes(product.id)}
-                    onChange={() => handleCheckboxChange(product.id)}
+                    checked={selectedSupplier.includes(supplier.id)}
+                    onChange={() => handleCheckboxChange(supplier.id)}
                   />
                 </td>
                 {/*<td>
-                  <img alt={product.nome} src={product.imagem} />
+                  <img alt={supplier.nome} src={supplier.imagem} />
                 </td>*/}
-                <td>{product.id}</td>
-                <td>{product.nome}</td>
-                <td>{product.categoria}</td>
-                <td>{product.preco}</td>
-                <td>{product.quantidade}</td>
+                <td>{supplier.id}</td>
+                <td>{supplier.nome}</td>
+                <td>{supplier.categoria}</td>
+                <td>{supplier.preco}</td>
+                <td>{supplier.quantidade}</td>
               </tr>
             ))}
           </tbody>
@@ -167,9 +191,10 @@ const Fornecedores = () => {
         <div className="modal-overlay-fornecedores">
           <div className="modal-content-fornecedores">
             <AdicionarFornecedor
-              product={isEditing ? productToEdit : null}
+              supplier={isEditing ? supplierToEdit : null}
               isEditing={isEditing}
               onClose={closeModal}
+              onSave={handleUpdateSupplier}
             />
             <button className="close-modal-btn-fornecedores" onClick={closeModal}>
               Fechar

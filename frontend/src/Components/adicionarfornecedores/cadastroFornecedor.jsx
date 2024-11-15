@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import './cadastroFornecedor.css';
 
 function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
@@ -7,7 +8,7 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
   const [cnpj, setCnpj] = useState(fornecedor?.cnpj || '');
   const [email, setEmail] = useState(fornecedor?.email || '');
   const [telefone, setTelefone] = useState(fornecedor?.telefone || '');
-  const [produtos, setProdutos] = useState(fornecedor?.produtos || '');
+  const [produtos, setProdutos] = useState(fornecedor?.produtos || []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,10 +30,11 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
 
     if (isEditing) {
       onSave(fornecedorAtualizado);
+      alert(`Fornecedor "${nome}" atualizado com sucesso!`);
       onClose();
     } else {
-      // adicionando fornecedor
-      fetch('http://localhost:3000/Stockandcash/backend/src/models/fornecedor.js', {
+      // Adicionando fornecedor
+      fetch('http://localhost:3000/fornecedores', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,24 +50,27 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
         .then((data) => {
           console.log('Fornecedor cadastrado:', data);
           alert(`Fornecedor "${data.nome}" cadastrado com sucesso!`);
-          setNome('');
-          setEndereco('');
-          setCnpj('');
-          setEmail('');
-          setTelefone('');
-          setProdutos('');
-          onClose();
         })
         .catch((error) => {
           console.error('Erro ao cadastrar o fornecedor:', error);
           alert('Erro ao cadastrar o fornecedor. Tente novamente!');
         });
     }
+
+    setNome('');
+    setEndereco('');
+    setCnpj('');
+    setEmail('');
+    setTelefone('');
+    setProdutos('');
+    onClose();
+
   };
 
   return (
     <div className="adicionar-fornecedor">
       <h2>{isEditing ? 'Editar Fornecedor' : 'Adicionar Fornecedor'}</h2>
+
       <form className="fornecedor-form" onSubmit={handleSubmit}>
         <div className="input-group-fornecedor">
           <label>Nome</label>
@@ -120,13 +125,32 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
         </div>
 
         
-
         <button type="submit" className="confirm-button-fornecedor">
           {isEditing ? 'Salvar Alterações' : 'Registrar Fornecedor'}
         </button>
       </form>
     </div>
   );
-}
+};
+
+// Validação das props
+AdicionarFornecedor.propTypes = {
+  fornecedor: PropTypes.shape({
+    id: PropTypes.number,
+    nome: PropTypes.string,
+    endereco: PropTypes.string,
+    cnpj: PropTypes.string,
+    email: PropTypes.string,
+    telefone: PropTypes.string,
+    produtos: PropTypes.string, // ou array se for um array de produtos
+    /*produtos: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      nome: PropTypes.string,
+    })),*/
+  }),
+  isEditing: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+};
 
 export default AdicionarFornecedor;
