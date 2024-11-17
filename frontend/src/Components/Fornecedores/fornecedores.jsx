@@ -98,18 +98,24 @@ const Fornecedores = () => {
       alert('Selecione pelo menos um fornecedor para excluir.');
       return;
     }
-    // Confirmação de exclusão
+    
     for (let id of selectedSupplier) {
-      const confirmed = window.confirm(`Você tem certeza que deseja excluir o fornecedor com ID ${id}?`);
+      // Localiza fornecedor pelo ID
+      const fornecedor = supplier.find((sup) => sup.id === id);
+      const nomeFornecedor = fornecedor?.nome || 'Fornecedor desconhecido';
+  
+      // Confirmação de exclusão com o nome do fornecedor
+      const confirmed = window.confirm(`Você tem certeza que deseja excluir o fornecedor "${nomeFornecedor}" com ID ${id}?`);
       if (confirmed) {
         try {
           await axios.delete(`http://localhost:3000/fornecedores/${id}`);
-          setSupplier(supplier.filter((supplier) => supplier.id !== id));
+          setSupplier(supplier.filter((sup) => sup.id !== id));
         } catch (error) {
           console.error(`Erro ao excluir o fornecedor com ID ${id}:`, error);
         }
       }
     }
+  
     // Limpa seleção após a exclusão
     setSelectedSupplier([]);
   };

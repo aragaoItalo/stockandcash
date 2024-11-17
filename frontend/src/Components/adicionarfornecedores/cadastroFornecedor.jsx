@@ -8,7 +8,7 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
   const [cnpj, setCnpj] = useState(supplier?.cnpj || '');
   const [email, setEmail] = useState(supplier?.email || '');
   const [telefone, setTelefone] = useState(supplier?.telefone || '');
-  const [produtos, setProdutos] = useState(supplier?.produtos || []);
+  //const [produtos, setProdutos] = useState(supplier?.produtos || []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
       cnpj,
       email,
       telefone,
-      produtos,
+      //produtos,
     };
 
     if (isEditing) {
@@ -41,31 +41,29 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
         },
         body: JSON.stringify(fornecedorAtualizado),
       })
-        .then((response) => {
+        .then( async (response) => {
           if (!response.ok) {
-            throw new Error('Erro ao cadastrar o fornecedor');
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Erro ao cadastrar o fornecedor');
           }
           return response.json();
         })
         .then((data) => {
           console.log('Fornecedor cadastrado:', data);
           alert(`Fornecedor "${data.nome}" cadastrado com sucesso!`);
+          setNome('');
+          setEndereco('');
+          setCnpj('');
+          setEmail('');
+          setTelefone('');
+          //setProdutos([]);
+          onClose();
         })
         .catch((error) => {
           console.error('Erro ao cadastrar o fornecedor:', error);
-          alert('Erro ao cadastrar o fornecedor. Tente novamente!');
+          alert(error.message || 'Erro ao cadastrar o fornecedor. Tente novamente!');
         });
     }
-
-    setNome('');
-    setEndereco('');
-    setCnpj('');
-    setEmail('');
-    setTelefone('');
-    setProdutos([]);
-    
-    onClose();
-
   };
 
   return (
@@ -136,22 +134,11 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
 
 // Validação das props
 AdicionarFornecedor.propTypes = {
-  supplier: PropTypes.shape({
-    id: PropTypes.number,
-    nome: PropTypes.string,
-    endereco: PropTypes.string,
-    cnpj: PropTypes.string,
-    email: PropTypes.string,
-    telefone: PropTypes.string,
-    produtos: PropTypes.string, // ou array se for um array de produtos
-    /*produtos: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      nome: PropTypes.string,
-    })),*/
-  }),
-  isEditing: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
+  supplier: PropTypes.object,
+  isEditing: PropTypes.bool,
+  onClose: PropTypes.func,
+  onSave: PropTypes.func,
 };
+
 
 export default AdicionarFornecedor;

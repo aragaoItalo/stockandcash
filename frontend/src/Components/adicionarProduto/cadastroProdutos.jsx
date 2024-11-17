@@ -162,8 +162,8 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
 AdicionarProduto.propTypes = {
   product: PropTypes.object,
   isEditing: PropTypes.bool,
-  onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
+  onSave: PropTypes.func,
 };
 
 export default AdicionarProduto;

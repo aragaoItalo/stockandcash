@@ -21,10 +21,10 @@ const Fornecedor = sequelize.define('Fornecedor', {
     telefone: {
         type: DataTypes.STRING,
         allowNull: false
-    },
+    }/*,
     produtos: {
         type: DataTypes.STRING
-    }
+    }*/
 });
 
 module.exports = Fornecedor;
