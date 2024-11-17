@@ -51,12 +51,14 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
         .then((data) => {
           console.log('Fornecedor cadastrado:', data);
           alert(`Fornecedor "${data.nome}" cadastrado com sucesso!`);
+          
           setNome('');
           setEndereco('');
           setCnpj('');
           setEmail('');
           setTelefone('');
           //setProdutos([]);
+          
           onClose();
         })
         .catch((error) => {

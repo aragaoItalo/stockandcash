@@ -8,10 +8,30 @@ import AdicionarFornecedor from '../adicionarFornecedores/cadastroFornecedor';
 const Sidebar = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [dataToEdit, setDataToEdit] = useState(null);
   const navigate = useNavigate();
+
+    // Abrir o seletor para escolher Produto ou Fornecedor
+    const openSelector = () => {
+      setIsSelectorOpen(true);
+    };
+  
+    // Fechar o seletor
+    const closeSelector = () => {
+      setIsSelectorOpen(false);
+    };
+  
+    // Abrir o modal correto após a seleção
+    const handleSelectType = (type) => {
+      setModalType(type);
+      setIsEditing(false); // Garantir que não estamos editando
+      setDataToEdit(null); // Resetar dados anteriores
+      setIsSelectorOpen(false); // Fechar o seletor
+      setIsModalOpen(true); // Abrir o modal
+    };
 
   // abre o modal com tipo especifico
   const openModal = (type, data = null) => {
@@ -51,8 +71,8 @@ const Sidebar = () => {
               </button>
             </li>
             <li>
-              <button className="sidebar-button" onClick={() => openModal('product')}>
-                <FaPlus className="fa-plus-icon" /> {/* Ícone de Adicionar Produto */}
+              <button className="sidebar-button" onClick={openSelector}>
+                <FaPlus className="fa-plus-icon" /> {/* Ícone de Adicionar*/}
               </button>
             </li>
             <li>
@@ -82,6 +102,25 @@ const Sidebar = () => {
         </div>
       </div>
 
+      {/* Janela de seleção */}
+      {isSelectorOpen && (
+        <div className="modal-overlay">
+          <div className="selector-modal">
+            <h3>Escolha uma opção</h3>
+            <button onClick={() => handleSelectType('product')} className="selector-button">
+              Adicionar Produto
+            </button>
+            <button onClick={() => handleSelectType('supplier')} className="selector-button">
+              Adicionar Fornecedor
+            </button>
+            <button onClick={closeSelector} className="close-selector-btn">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal para Produto ou Fornecedor */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">

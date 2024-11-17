@@ -22,14 +22,11 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
       id: product?.id,
       nome,
       preco: parseFloat(preco),
-      desconto: parseFloat(desconto),
+      desconto: parseFloat(desconto) || 0,
       quantidade: parseInt(quantidade, 10),
       categoria,
       descricao,
     };
-    
-    onSave(product);
-    onClose();
 
     if (isEditing) {
       onSave(produtoAtualizado);
@@ -52,12 +49,14 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
         .then((data) => {
           console.log('Produto cadastrado:', data);
           alert(`Produto "${data.nome}" cadastrado com sucesso!`);
+
           setNome('');
           setPreco('');
           setDesconto('');
           setQuantidade('');
           setCategoria('');
           setDescricao('');
+
           onClose();
         })
         .catch((error) => {
@@ -75,11 +74,6 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
         <div className="left-section">
           <div className="upload-box">
             <i className="faz fa-upload"></i>
-          </div>
-          <div className="upload-buttons">
-            <button><i className="faz fa-upload"></i></button>
-            <button><i className="faz fa-upload"></i></button>
-            <button><i className="faz fa-upload"></i></button>
           </div>
         </div>
 
