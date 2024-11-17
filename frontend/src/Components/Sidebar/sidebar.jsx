@@ -14,23 +14,22 @@ const Sidebar = () => {
   const [dataToEdit, setDataToEdit] = useState(null);
   const navigate = useNavigate();
 
-    // Abrir o seletor para escolher Produto ou Fornecedor
+    //Produto ou Fornecedor
     const openSelector = () => {
       setIsSelectorOpen(true);
     };
   
-    // Fechar o seletor
     const closeSelector = () => {
       setIsSelectorOpen(false);
     };
   
-    // Abrir o modal correto após a seleção
+    // Modal selecionado
     const handleSelectType = (type) => {
       setModalType(type);
-      setIsEditing(false); // Garantir que não estamos editando
-      setDataToEdit(null); // Resetar dados anteriores
-      setIsSelectorOpen(false); // Fechar o seletor
-      setIsModalOpen(true); // Abrir o modal
+      setIsEditing(false); 
+      setDataToEdit(null);
+      setIsSelectorOpen(false);
+      setIsModalOpen(true);
     };
 
   // abre o modal com tipo especifico
