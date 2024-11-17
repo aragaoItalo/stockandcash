@@ -2,13 +2,13 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './cadastroFornecedor.css';
 
-function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
-  const [nome, setNome] = useState(fornecedor?.nome || '');
-  const [endereco, setEndereco] = useState(fornecedor?.endereco || '');
-  const [cnpj, setCnpj] = useState(fornecedor?.cnpj || '');
-  const [email, setEmail] = useState(fornecedor?.email || '');
-  const [telefone, setTelefone] = useState(fornecedor?.telefone || '');
-  const [produtos, setProdutos] = useState(fornecedor?.produtos || []);
+function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
+  const [nome, setNome] = useState(supplier?.nome || '');
+  const [endereco, setEndereco] = useState(supplier?.endereco || '');
+  const [cnpj, setCnpj] = useState(supplier?.cnpj || '');
+  const [email, setEmail] = useState(supplier?.email || '');
+  const [telefone, setTelefone] = useState(supplier?.telefone || '');
+  const [produtos, setProdutos] = useState(supplier?.produtos || []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
     }
 
     const fornecedorAtualizado = {
-      id: fornecedor?.id,
+      id: supplier?.id,
       nome,
       endereco,
       cnpj,
@@ -62,7 +62,8 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
     setCnpj('');
     setEmail('');
     setTelefone('');
-    setProdutos('');
+    setProdutos([]);
+    
     onClose();
 
   };
@@ -135,7 +136,7 @@ function AdicionarFornecedor({ fornecedor, isEditing, onClose, onSave }) {
 
 // Validação das props
 AdicionarFornecedor.propTypes = {
-  fornecedor: PropTypes.shape({
+  supplier: PropTypes.shape({
     id: PropTypes.number,
     nome: PropTypes.string,
     endereco: PropTypes.string,

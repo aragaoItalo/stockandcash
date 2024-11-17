@@ -71,7 +71,7 @@ const Fornecedores = () => {
 
   const handleUpdateSupplier = async (fornecedorAtualizado) => {
     try {
-      await axios.put(`http://localhost:3000/fornecedor/${fornecedorAtualizado.id}`, fornecedorAtualizado);
+      await axios.put(`http://localhost:3000/fornecedores/${fornecedorAtualizado.id}`, fornecedorAtualizado);
       setSupplier((prevSupplier) =>
         prevSupplier.map((supplier) =>
           supplier.id === fornecedorAtualizado.id ? fornecedorAtualizado : supplier
@@ -157,9 +157,9 @@ const Fornecedores = () => {
               <th></th>
               <th>ID</th>
               <th>Nome</th>
-              <th>Contato</th>
-              <th>Telefone</th>
+              <th>CNPJ</th>
               <th>Email</th>
+              <th>Telefone</th>
             </tr>
           </thead>
           <tbody>
@@ -177,9 +177,9 @@ const Fornecedores = () => {
                 </td>*/}
                 <td>{supplier.id}</td>
                 <td>{supplier.nome}</td>
-                <td>{supplier.categoria}</td>
-                <td>{supplier.preco}</td>
-                <td>{supplier.quantidade}</td>
+                <td>{supplier.cnpj}</td>
+                <td>{supplier.email}</td>
+                <td>{supplier.telefone}</td>
               </tr>
             ))}
           </tbody>

@@ -19,6 +19,7 @@ const Notificacao = require('./src/models/notificacao.js');
 //Import routes
 const clienteRoutes = require('./src/routes/clienteRoutes.js');
 const produtoRoutes = require('./src/routes/produtoRoutes.js');
+const fornecedorRoutes = require('./src/routes/fornecedorRoutes.js')
 
 //Config Express
 const app = express();
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/clientes', clienteRoutes);
 app.use('/produtos', produtoRoutes);
+app.use('/fornecedores', fornecedorRoutes);
 
 //Rota Simples p teste do server
 app.get('/', (req, res) => {
