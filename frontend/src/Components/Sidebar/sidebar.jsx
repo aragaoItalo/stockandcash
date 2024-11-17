@@ -32,15 +32,7 @@ const Sidebar = () => {
       setIsModalOpen(true);
     };
 
-  // abre o modal com tipo especifico
-  const openModal = (type, data = null) => {
-    setModalType(type);
-    setDataToEdit(data);
-    setIsEditing(!!data);
-    setIsModalOpen(true);
-  };
-
-  // fecha o modal
+  // Fecha o modal
   const closeModal = () => {
     setIsModalOpen(false);
     setModalType(null);
