@@ -1,0 +1,50 @@
+/* Contêiner do gráfico com fundo */
+.grafico-container {
+    display: flex;
+    justify-content: flex-start; /* Alinha os itens à esquerda */
+    gap: 16px;
+    padding: 16px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  /* Estilo do gráfico */
+  .grafico-card {
+    width: 220px; /* Reduzido o tamanho do card */
+    height: 220px;
+    position: relative;
+    transition: transform 0.3s ease; /* Adiciona transição para hover */
+    margin-bottom: 16px;
+  }
+  
+  .grafico-card:hover {
+    transform: scale(1.05); /* Efeito de zoom no hover */
+  }
+  
+  /* Legenda ao lado do gráfico */
+  .grafico-legend {
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    margin-top: 8px;
+  }
+  
+  /* Cada item da legenda com a cor e o valor */
+  .grafico-legend div {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Caixa colorida ao lado da legenda */
+  .grafico-legend .color-box {
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-radius: 2px;
+  }
+  

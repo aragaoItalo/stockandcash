@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaPlus, FaBox, FaListUl, FaClipboard, FaCog } from 'react-icons/fa';
+import { FaPlus, FaBox, FaListUl, FaClipboard, FaCog, FaAddressBook } from 'react-icons/fa';
 import './sidebar.css';
 import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
 import AdicionarFornecedor from '../adicionarFornecedores/cadastroFornecedor';
@@ -50,6 +50,7 @@ const Sidebar = () => {
 
   const handleGoToEstoque = () => navigate('/estoque');
   const handleGoToDashboard = () => navigate('/dashboard');
+  const handleGoToFornecedores = () => navigate('/fornecedores');
 
   return (
     <div>
@@ -72,8 +73,8 @@ const Sidebar = () => {
               </button>
             </li>
             <li>
-              <button className="sidebar-button">
-                <FaListUl />
+              <button className="sidebar-button" onClick={handleGoToFornecedores}>
+                <FaAddressBook />
               </button>
             </li>
             <li>

@@ -8,6 +8,7 @@ import Estoque from './Components/Estoque/Estoque';
 import Sidebar from './Components/Sidebar/sidebar';
 import Fornecedores from './Components/Fornecedores/fornecedores';
 import AdicionarFornecedor from './Components/adicionarFornecedores/cadastroFornecedor';
+import Grafico from './Components/Dashboard/cards/grafico';
 
 const App = () => {
     return (
@@ -22,6 +23,7 @@ const App = () => {
                 <Route path="/Sidebar" element={<Sidebar />} />
                 <Route path="/fornecedores" element={<Fornecedores />} />
                 <Route path="/adicionarFornecedores" element={<AdicionarFornecedor />} />
+                <Route path="/grafico" element={<Grafico />} />
             </Routes>
         </Router>
     );

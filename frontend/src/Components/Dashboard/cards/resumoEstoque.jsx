@@ -1,5 +1,5 @@
 import React from 'react';
-import './resumoEstoque.css';
+import './ResumoEstoque.css';
 
 const ResumoEstoque = () => {
   return (

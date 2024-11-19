@@ -92,3 +92,38 @@
 .popup p:hover {
     color: #e74c3c; /* Cor ao passar o mouse sobre o texto */
 }
+/* Estilo para o contêiner de cards */
+/* Estilo para o contêiner de cards */
+/* Estilo para o contêiner de cards */
+/* Estilo para o contêiner de cards */
+/* Estilo para o dashboard */
+/* Estilo para o dashboard */
+/* Estilo para o dashboard */
+.dashboard {
+    display: flex;
+  }
+  
+  /* Estilo para o conteúdo principal do dashboard */
+  .dashboard-main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 20px;
+  }
+  
+  /* Contêiner para os cards no dashboard */
+  .dashboard-cards {
+    display: flex;
+    justify-content: flex-start; /* Alinha os cards à esquerda */
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-left: 20px; /* Ajuste do alinhamento à esquerda */
+  }
+  
+  /* Responsividade para telas menores */
+  @media (max-width: 768px) {
+    .dashboard-cards {
+      flex-direction: column; /* Coloca os cards empilhados em telas pequenas */
+      align-items: center;
+    }
+  }
+  
