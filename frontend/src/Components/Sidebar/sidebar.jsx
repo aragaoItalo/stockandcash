@@ -4,6 +4,7 @@ import { FaPlus, FaBox, FaListUl, FaClipboard, FaCog, FaAddressBook } from 'reac
 import './sidebar.css';
 import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
 import AdicionarFornecedor from '../adicionarFornecedores/cadastroFornecedor';
+import Pedidos from '../Pedidos/Pedidos';
 
 const Sidebar = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -51,6 +52,7 @@ const Sidebar = () => {
   const handleGoToEstoque = () => navigate('/estoque');
   const handleGoToDashboard = () => navigate('/dashboard');
   const handleGoToFornecedores = () => navigate('/fornecedores');
+  const handleGoToPedidos = () => navigate('/pedidos');
 
   return (
     <div>
@@ -78,7 +80,7 @@ const Sidebar = () => {
               </button>
             </li>
             <li>
-              <button className="sidebar-button">
+              <button className="sidebar-button" onClick={handleGoToPedidos} >
                 <FaClipboard />
               </button>
             </li>
