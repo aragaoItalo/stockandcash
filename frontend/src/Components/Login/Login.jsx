@@ -1,8 +1,9 @@
 // src/Components/Login/Login.jsx
 import { FaUser, FaLock } from 'react-icons/fa';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import Swal from 'sweetalert2';
  
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -15,7 +16,12 @@ const Login = () => {
         const trimmedPassword = password.trim();
  
         if (!trimmedEmail || !trimmedPassword) {
-            alert('Por favor, preencha todos os campos.');
+            //alert('Por favor, preencha todos os campos.');
+            Swal.fire({
+                text: 'Por favor, preencha todos os campos.',
+                icon: 'warning',
+                confirmButtonText: 'Fechar',
+            });
             return;
         }
  
@@ -34,11 +40,21 @@ const Login = () => {
  
             const data = await response.json();
             localStorage.setItem('token', data.token); // Armazena o token JWT
-            alert('Login realizado com sucesso!');
+            //alert('Login realizado com sucesso!');
+            Swal.fire({
+                text: 'Login realizado com sucesso!',
+                icon: 'success',
+                confirmButtonText: 'Fechar',
+            });
             navigate('/dashboard');
         } catch (error) {
             console.error('Erro ao realizar login:', error);
-            alert('Erro ao realizar login: ' + error.message);
+            //alert('Erro ao realizar login: ' + error.message);
+            Swal.fire({
+                text: 'Erro ao realizar login: ' + error.message,
+                icon: 'error',
+                confirmButtonText: 'Fechar',
+            });
         }
     };
  

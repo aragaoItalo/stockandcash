@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './cadastroProdutos.css';
+import Swal from 'sweetalert2';
+
 
 function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
   const [nome, setNome] = useState(product?.nome || '');
@@ -14,7 +16,12 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
     e.preventDefault();
 
     if (!nome || !preco || !quantidade || !descricao) {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      //alert('Por favor, preencha todos os campos obrigatórios.');
+      Swal.fire({
+        text: 'Por favor, preencha todos os campos obrigatórios.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+    });
       return;
     }
     
@@ -30,9 +37,14 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
 
     if (isEditing) {
       onSave(produtoAtualizado);
+      Swal.fire({
+        text: `Produto "${produtoAtualizado.nome}" atualizado com sucesso!`,
+        icon: 'success',
+        confirmButtonText: 'Fechar',
+    });
       onClose();
     } else {
-      // adicionando produto
+      // Adicionando produto
       fetch('http://localhost:3000/produtos', {
         method: 'POST',
         headers: {
@@ -48,7 +60,12 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
         })
         .then((data) => {
           console.log('Produto cadastrado:', data);
-          alert(`Produto "${data.nome}" cadastrado com sucesso!`);
+          //alert(`Produto "${data.nome}" cadastrado com sucesso!`);
+          Swal.fire({
+            text: `Produto "${data.nome}" cadastrado com sucesso!`,
+            icon: 'success',
+            confirmButtonText: 'Fechar',
+        });
 
           setNome('');
           setPreco('');
@@ -61,7 +78,12 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
         })
         .catch((error) => {
           console.error('Erro ao cadastrar o produto:', error);
-          alert('Erro ao cadastrar o produto. Tente novamente!');
+          //alert('Erro ao cadastrar o produto. Tente novamente!');
+          Swal.fire({
+            text: 'Erro ao cadastrar o produto. Tente novamente!',
+            icon: 'error',
+            confirmButtonText: 'Fechar',
+        });
         });
     }
   };

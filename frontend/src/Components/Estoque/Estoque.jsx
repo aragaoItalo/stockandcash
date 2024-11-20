@@ -6,6 +6,8 @@ import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
 import { FaPlus, /*FaHome, FaListUl, FaClipboard, FaCog,*/ FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
 //import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/sidebar';
+import Swal from 'sweetalert2';
+
 
 const Estoque = () => {
   const [products, setProducts] = useState([]);
@@ -65,7 +67,12 @@ const Estoque = () => {
         openModal();
       }
     } else {
-      alert('Selecione apenas um produto para editar.');
+      //alert('Selecione apenas um produto para editar.');
+      Swal.fire({
+        text: 'Selecione apenas um produto para editar.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+    });
     }
   };
 
@@ -88,22 +95,38 @@ const Estoque = () => {
     } catch (error) {
       console.error('Erro ao atualizar o produto:', error);
       if(isEditing) {
-        alert('Erro ao atualizar o produto. Tente novamente.');
+        //alert('Erro ao atualizar o produto. Tente novamente.');
+        Swal.fire({
+          text: 'Erro ao atualizar o produto. Tente novamente.',
+          icon: 'error',
+          confirmButtonText: 'Fechar',
+      });
       }
     }
   };
 
   const handleDeleteProduct = async () => {
     if (selectedProducts.length === 0) {
-      alert('Selecione pelo menos um produto para excluir.');
+      Swal.fire({
+        text: 'Selecione pelo menos um produto para excluir.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+      });
       return;
     }
-    // Confirmação de exclusão com nome e ID do produto
+  
     for (let id of selectedProducts) {
       const productToDelete = products.find((product) => product.id === id);
       if (productToDelete) {
-        const confirmed = window.confirm(`Você tem certeza que deseja excluir o produto "${productToDelete.nome}" com ID ${id}?`);
-        if (confirmed) {
+        const result = await Swal.fire({
+          text: `Você tem certeza que deseja excluir o produto "${productToDelete.nome}" com ID ${id}?`,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Excluir',
+          cancelButtonText: 'Cancelar',
+        });
+  
+        if (result.isConfirmed) {
           try {
             await axios.delete(`http://localhost:3000/produtos/${id}`);
             setProducts(products.filter((product) => product.id !== id));
@@ -113,6 +136,7 @@ const Estoque = () => {
         }
       }
     }
+  
     // Limpa seleção após a exclusão
     setSelectedProducts([]);
   };

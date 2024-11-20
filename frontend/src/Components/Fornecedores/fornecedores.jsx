@@ -6,6 +6,8 @@ import AdicionarFornecedor from '../adicionarFornecedores/cadastroFornecedor';
 import { FaPlus, /*FaHome, FaListUl, FaClipboard, FaCog,*/ FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa'; 
 //import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/sidebar';
+import Swal from 'sweetalert2';
+
 
 const Fornecedores = () => {
   const [supplier, setSupplier] = useState([]);
@@ -65,7 +67,12 @@ const Fornecedores = () => {
         openModal();
       }
     } else {
-      alert('Selecione apenas um fornecedor para editar.');
+      //alert('Selecione apenas um fornecedor para editar.');
+      Swal.fire({
+        text: 'Selecione apenas um fornecedor para editar.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+    });
     }
   };
 
@@ -88,37 +95,56 @@ const Fornecedores = () => {
     } catch (error) {
       console.error('Erro ao atualizar o fornecedor:', error);
       if(isEditing) {
-        alert('Erro ao atualizar o fornecedor. Tente novamente.');
+        //alert('Erro ao atualizar o fornecedor. Tente novamente.');
+        Swal.fire({
+          text: 'Erro ao atualizar o fornecedor. Tente novamente.',
+          icon: 'error',
+          confirmButtonText: 'Fechar',
+      });
       }
     }
   };
 
   const handleDeleteSupplier = async () => {
     if (selectedSupplier.length === 0) {
-      alert('Selecione pelo menos um fornecedor para excluir.');
+      // Alerta usando SweetAlert
+      Swal.fire({
+        text: 'Selecione pelo menos um fornecedor para excluir.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+      });
       return;
     }
-    
+  
     for (let id of selectedSupplier) {
-      // Localiza fornecedor pelo ID
       const fornecedor = supplier.find((sup) => sup.id === id);
       const nomeFornecedor = fornecedor?.nome || 'Fornecedor desconhecido';
+      const result = await Swal.fire({
+        text: `Você tem certeza que deseja excluir o fornecedor "${nomeFornecedor}" com ID ${id}?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Excluir',
+        cancelButtonText: 'Cancelar',
+      });
   
-      // Confirmação de exclusão com o nome do fornecedor
-      const confirmed = window.confirm(`Você tem certeza que deseja excluir o fornecedor "${nomeFornecedor}" com ID ${id}?`);
-      if (confirmed) {
+      if (result.isConfirmed) {
         try {
           await axios.delete(`http://localhost:3000/fornecedores/${id}`);
           setSupplier(supplier.filter((sup) => sup.id !== id));
         } catch (error) {
+          Swal.fire({
+            text: `Erro ao excluir o fornecedor "${nomeFornecedor}" com ID ${id}. Tente novamente mais tarde.`,
+            icon: 'error',
+            confirmButtonText: 'Fechar',
+          });
+  
           console.error(`Erro ao excluir o fornecedor com ID ${id}:`, error);
         }
       }
     }
-  
     // Limpa seleção após a exclusão
     setSelectedSupplier([]);
-  };
+  };  
 
   const handleCheckboxChange = (supplierId) => {
     setSelectedSupplier((prevSelected) =>

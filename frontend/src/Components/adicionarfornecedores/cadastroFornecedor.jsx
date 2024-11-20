@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './cadastroFornecedor.css';
+import Swal from 'sweetalert2';
+
 
 function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
   const [nome, setNome] = useState(supplier?.nome || '');
@@ -14,7 +16,12 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
     e.preventDefault();
 
     if (!nome || !endereco || !cnpj || !email || !telefone) {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      //alert('Por favor, preencha todos os campos obrigatórios.');
+      Swal.fire({
+        text: 'Por favor, preencha todos os campos obrigatórios.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+    });
       return;
     }
 
@@ -30,7 +37,12 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
 
     if (isEditing) {
       onSave(fornecedorAtualizado);
-      alert(`Fornecedor "${nome}" atualizado com sucesso!`);
+      //alert(`Fornecedor "${nome}" atualizado com sucesso!`);
+      Swal.fire({
+        text: `Fornecedor "${nome}" atualizado com sucesso!`,
+        icon: 'success',
+        confirmButtonText: 'Fechar',
+    });
       onClose();
     } else {
       // Adicionando fornecedor
@@ -50,7 +62,12 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
         })
         .then((data) => {
           console.log('Fornecedor cadastrado:', data);
-          alert(`Fornecedor "${data.nome}" cadastrado com sucesso!`);
+          //alert(`Fornecedor "${data.nome}" cadastrado com sucesso!`);
+          Swal.fire({
+            text: `Fornecedor "${data.nome}" cadastrado com sucesso!`,
+            icon: 'success',
+            confirmButtonText: 'Fechar',
+        });
           
           setNome('');
           setEndereco('');
@@ -63,7 +80,12 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
         })
         .catch((error) => {
           console.error('Erro ao cadastrar o fornecedor:', error);
-          alert(error.message || 'Erro ao cadastrar o fornecedor. Tente novamente!');
+          //alert(error.message || 'Erro ao cadastrar o fornecedor. Tente novamente!');
+          Swal.fire({
+            text: 'Erro ao cadastrar o fornecedor. Tente novamente!',
+            icon: 'error',
+            confirmButtonText: 'Fechar',
+        });
         });
     }
   };

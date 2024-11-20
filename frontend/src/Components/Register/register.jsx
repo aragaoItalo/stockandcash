@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaStore, FaLock } from 'react-icons/fa';
 import './Register.css';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const [firstName, setFirstName] = useState("");
@@ -18,17 +19,27 @@ const Register = () => {
         e.preventDefault();
 
         if (email !== confirmEmail) {
-            alert("Os emails não coincidem.");
+            //alert("Os emails não coincidem.");
+            Swal.fire({
+                text: 'Os emails não coincidem.',
+                icon: 'warning',
+                confirmButtonText: 'Fechar',
+            });
             return;
         }
 
         if (password !== confirmPassword) {
-            alert("As senhas não coincidem.");
+            //alert("As senhas não coincidem.");
+            Swal.fire({
+                text: 'As senhas não coincidem.',
+                icon: 'warning',
+                confirmButtonText: 'Fechar',
+            });
             return;
         }
 
         try {
-            const response = await fetch('http://localhost:3000/auth/signup', { // URL do endpoint de registro do backend
+            const response = await fetch('http://localhost:3000/auth/signup', { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,11 +58,22 @@ const Register = () => {
             }
 
             const data = await response.json();
-            alert("Registro realizado com sucesso!");
-            navigate('/login'); // Redirecionamento ao login
+            //alert("Registro realizado com sucesso!");
+            Swal.fire({
+                text: 'Registro realizado com sucesso!',
+                icon: 'success',
+                confirmButtonText: 'Fechar',
+            });
+
+            navigate('/login');
         } catch (error) {
             console.error('Erro ao realizar registro:', error);
-            alert('Erro ao realizar registro: ' + error.message);
+            //alert('Erro ao realizar registro: ' + error.message);
+            Swal.fire({
+                text: 'Erro ao realizar registro: ' + error.message,
+                icon: 'error',
+                confirmButtonText: 'Fechar',
+            });
         }
     };
 
