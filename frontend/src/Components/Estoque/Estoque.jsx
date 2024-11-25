@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Estoque.css';
 import AdicionarProduto from '../adicionarProduto/cadastroProdutos';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FaPlus, /*FaHome, FaListUl, FaClipboard, FaCog,*/ FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa';  // Usando os mesmos ícones
-//import { useNavigate } from 'react-router-dom';
+import { FaPlus, FaTrash, FaEdit, /*FaChevronDown*/ } from 'react-icons/fa';
 import Sidebar from '../Sidebar/sidebar';
 import Swal from 'sweetalert2';
 
@@ -15,36 +13,28 @@ const Estoque = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
-  //const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  //const navigate = useNavigate();
-
-  // Função para abrir o modal
   const openModal = () => {
     setIsModalOpen(true);
   };
 
-  // Função para fechar o modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
-/*
-  // Função para exibir ou esconder o popup
-  const togglePopup = () => {
-    setIsPopupVisible(!isPopupVisible);
+
+  const categoriasMap = {
+    1: 'Bebidas',
+    2: 'Comidas',
+    3: 'Outros',
   };
 
-  // Função de logout
-  const handleLogout = () => {
-    console.log('Logout');
-    navigate('/login');
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(price);
   };
 
-  // Função para navegar até a página de estoque
-  const handleGoToEstoque = () => {
-    navigate('/estoque');  // Redireciona para a página de estoque
-  };
-*/
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -67,7 +57,6 @@ const Estoque = () => {
         openModal();
       }
     } else {
-      //alert('Selecione apenas um produto para editar.');
       Swal.fire({
         text: 'Selecione apenas um produto para editar.',
         icon: 'warning',
@@ -95,7 +84,6 @@ const Estoque = () => {
     } catch (error) {
       console.error('Erro ao atualizar o produto:', error);
       if(isEditing) {
-        //alert('Erro ao atualizar o produto. Tente novamente.');
         Swal.fire({
           text: 'Erro ao atualizar o produto. Tente novamente.',
           icon: 'error',
@@ -172,10 +160,11 @@ const Estoque = () => {
               <FaEdit />
               Editar produtos
             </button>
-          </div>
+          {/*</div>
           <div className="filter">
             <span>Filtrar</span>
             <FaChevronDown />
+            */}
           </div>
         </div>
         <table className="product-table">
@@ -187,6 +176,7 @@ const Estoque = () => {
               <th>Categoria</th>
               <th>Preço</th>
               <th>Quantidade</th>
+              <th>Fornecedor</th>
             </tr>
           </thead>
           <tbody>
@@ -199,14 +189,12 @@ const Estoque = () => {
                     onChange={() => handleCheckboxChange(product.id)}
                   />
                 </td>
-                {/*<td>
-                  <img alt={product.nome} src={product.imagem} />
-                </td>*/}
                 <td>{product.id}</td>
                 <td>{product.nome}</td>
-                <td>{product.categoria}</td>
-                <td>{product.preco}</td>
+                <td>{categoriasMap[product.categoria] || 'Categoria não definida'}</td>
+                <td>{formatPrice(product.preco)}</td>
                 <td>{product.quantidade}</td>
+                <td>{product.fornecedor?.nome || 'Fornecedor não definido'}</td>
               </tr>
             ))}
           </tbody>

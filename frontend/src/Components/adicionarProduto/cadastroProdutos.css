@@ -193,3 +193,32 @@ h3 {
   font-size: 0.8em;
   color: #888;
 }
+
+/* Estilo para os labels e selects, para categoria e fornecedor */
+.input-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px; /* Adiciona espaçamento inferior */
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333; /* Definindo a cor do texto para os labels */
+}
+
+.input-group select:focus,
+.input-group select:hover {
+  border-color: #6a3dff; /* Cor de borda ao focar ou passar o mouse */
+  outline: none;
+}
+
+/* Estilo de comportamento para todos os selects */
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}

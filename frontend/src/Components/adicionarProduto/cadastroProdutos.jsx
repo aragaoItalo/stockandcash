@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './cadastroProdutos.css';
 import Swal from 'sweetalert2';
@@ -11,12 +11,29 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
   const [quantidade, setQuantidade] = useState(product?.quantidade || '');
   const [categoria, setCategoria] = useState(product?.categoria || '');
   const [descricao, setDescricao] = useState(product?.descricao || '');
+  const [fornecedores, setFornecedores] = useState([]);
+  const [fornecedorId, setFornecedorId] = useState(product?.fornecedorId || '');
+
+  useEffect(() => {
+    fetch('http://localhost:3000/fornecedores')
+      .then((response) => response.json())
+      .then((data) => {
+        setFornecedores(data);
+      })
+      .catch((error) => {
+        console.error('Erro ao carregar fornecedores:', error);
+        Swal.fire({
+          text: 'Erro ao carregar fornecedores. Tente novamente!',
+          icon: 'error',
+          confirmButtonText: 'Fechar',
+        });
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!nome || !preco || !quantidade || !descricao) {
-      //alert('Por favor, preencha todos os campos obrigatórios.');
+    if (!nome || !preco || !quantidade || !descricao || !fornecedorId) {
       Swal.fire({
         text: 'Por favor, preencha todos os campos obrigatórios.',
         icon: 'warning',
@@ -24,7 +41,49 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
     });
       return;
     }
-    
+
+    //Valida o preço
+    const precoFloat = parseFloat(preco);
+    if (isNaN(precoFloat) || precoFloat <= 0) {
+      Swal.fire({
+        text: 'Por favor, insira um preço válido.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+      });
+      return;
+    }
+  
+    //Valida o desconto
+    const descontoFloat = desconto ? parseFloat(desconto) : 0;
+    if (descontoFloat < 0 || descontoFloat > 100 || isNaN(descontoFloat)) {
+      Swal.fire({
+        text: 'Por favor, insira um desconto válido entre 0 e 100.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+      });
+      return;
+    }
+  
+    //Valida quantidade
+    const quantidadeInt = parseInt(quantidade);
+    if (isNaN(quantidadeInt) || quantidadeInt <= 0) {
+      Swal.fire({
+        text: 'Por favor, insira uma quantidade válida.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+      });
+      return;
+    }
+
+    if (!categoria) {
+      Swal.fire({
+        text: 'Por favor, selecione uma categoria.',
+        icon: 'warning',
+        confirmButtonText: 'Fechar',
+      });
+      return;
+    }
+
     const produtoAtualizado = {
       id: product?.id,
       nome,
@@ -33,6 +92,7 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
       quantidade: parseInt(quantidade, 10),
       categoria,
       descricao,
+      fornecedorId,
     };
 
     if (isEditing) {
@@ -60,7 +120,6 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
         })
         .then((data) => {
           console.log('Produto cadastrado:', data);
-          //alert(`Produto "${data.nome}" cadastrado com sucesso!`);
           Swal.fire({
             text: `Produto "${data.nome}" cadastrado com sucesso!`,
             icon: 'success',
@@ -73,12 +132,12 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
           setQuantidade('');
           setCategoria('');
           setDescricao('');
+          setFornecedorId('');
 
           onClose();
         })
         .catch((error) => {
           console.error('Erro ao cadastrar o produto:', error);
-          //alert('Erro ao cadastrar o produto. Tente novamente!');
           Swal.fire({
             text: 'Erro ao cadastrar o produto. Tente novamente!',
             icon: 'error',
@@ -150,9 +209,25 @@ function AdicionarProduto( { product, isEditing, onClose, onSave } ) {
               onChange={(e) => setCategoria(e.target.value)}
             >
               <option value="">Selecione a Categoria</option>
-              <option value="1">Bebida</option>
-              <option value="2">Comida</option>
+              <option value="1">Bebidas</option>
+              <option value="2">Comidas</option>
               <option value="3">Outros</option>
+            </select>
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="fornecedor">Fornecedor</label>
+            <select
+              id="fornecedor"
+              value={fornecedorId}
+              onChange={(e) => setFornecedorId(e.target.value)}
+            >
+              <option value="">Selecione um fornecedor</option>
+              {fornecedores.map((fornecedor) => (
+                <option key={fornecedor.id} value={fornecedor.id}>
+                  {fornecedor.nome}
+                </option>
+              ))}
             </select>
           </div>
 

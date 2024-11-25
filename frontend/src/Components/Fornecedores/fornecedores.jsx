@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './fornecedores.css';
 import AdicionarFornecedor from '../adicionarFornecedores/cadastroFornecedor';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FaPlus, /*FaHome, FaListUl, FaClipboard, FaCog,*/ FaTrash, FaEdit, FaChevronDown } from 'react-icons/fa'; 
-//import { useNavigate } from 'react-router-dom';
+import { FaPlus, FaTrash, FaEdit, /*FaChevronDown*/ } from 'react-icons/fa'; 
 import Sidebar from '../Sidebar/sidebar';
 import Swal from 'sweetalert2';
 
@@ -15,36 +13,15 @@ const Fornecedores = () => {
   const [selectedSupplier, setSelectedSupplier] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [supplierToEdit, setSupplierToEdit] = useState(null);
-  //const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  //const navigate = useNavigate();
-
-  // Função para abrir o modal
   const openModal = () => {
     setIsModalOpen(true);
   };
 
-  // Função para fechar o modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
-/*
-  // Função para exibir ou esconder o popup
-  const togglePopup = () => {
-    setIsPopupVisible(!isPopupVisible);
-  };
 
-  // Função de logout
-  const handleLogout = () => {
-    console.log('Logout');
-    navigate('/login');
-  };
-
-  // Função para navegar até a página de estoque
-  const handleGoToEstoque = () => {
-    navigate('/estoque');  // Redireciona para a página de estoque
-  };
-*/
   useEffect(() => {
     const fetchSupplier = async () => {
       try {
@@ -67,7 +44,6 @@ const Fornecedores = () => {
         openModal();
       }
     } else {
-      //alert('Selecione apenas um fornecedor para editar.');
       Swal.fire({
         text: 'Selecione apenas um fornecedor para editar.',
         icon: 'warning',
@@ -94,20 +70,16 @@ const Fornecedores = () => {
       setSupplierToEdit(null);
     } catch (error) {
       console.error('Erro ao atualizar o fornecedor:', error);
-      if(isEditing) {
-        //alert('Erro ao atualizar o fornecedor. Tente novamente.');
         Swal.fire({
           text: 'Erro ao atualizar o fornecedor. Tente novamente.',
           icon: 'error',
           confirmButtonText: 'Fechar',
       });
-      }
     }
   };
 
   const handleDeleteSupplier = async () => {
     if (selectedSupplier.length === 0) {
-      // Alerta usando SweetAlert
       Swal.fire({
         text: 'Selecione pelo menos um fornecedor para excluir.',
         icon: 'warning',
@@ -137,7 +109,6 @@ const Fornecedores = () => {
             icon: 'error',
             confirmButtonText: 'Fechar',
           });
-  
           console.error(`Erro ao excluir o fornecedor com ID ${id}:`, error);
         }
       }
@@ -156,10 +127,8 @@ const Fornecedores = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      {/* Sidebar */}
-      
+      {/* Sidebar */}      
       <Sidebar />
-
       {/* Content */}
       <div className="content">
         <div className="header">
@@ -177,10 +146,12 @@ const Fornecedores = () => {
               <FaEdit />
               Editar fornecedores
             </button>
-          </div>
-          <div className="filter">
+          {/*</div>
+            
+            <div className="filter">
             <span>Filtrar</span>
             <FaChevronDown />
+            */}
           </div>
         </div>
         <table className="fornecedor-table">
@@ -192,6 +163,7 @@ const Fornecedores = () => {
               <th>CNPJ</th>
               <th>Email</th>
               <th>Telefone</th>
+              <th>Produtos</th>
             </tr>
           </thead>
           <tbody>
@@ -204,14 +176,24 @@ const Fornecedores = () => {
                     onChange={() => handleCheckboxChange(supplier.id)}
                   />
                 </td>
-                {/*<td>
-                  <img alt={supplier.nome} src={supplier.imagem} />
-                </td>*/}
                 <td>{supplier.id}</td>
                 <td>{supplier.nome}</td>
                 <td>{supplier.cnpj}</td>
                 <td>{supplier.email}</td>
                 <td>{supplier.telefone}</td>
+                <td>
+                  {supplier.produtos && supplier.produtos.length > 0 ? (
+                    <ul>
+                      {supplier.produtos.map((product) => (
+                        <li key={product.id}>
+                          {product.nome} - {product.preco}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <span>Não há produtos registrados</span>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

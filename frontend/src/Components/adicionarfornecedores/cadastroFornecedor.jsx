@@ -10,13 +10,11 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
   const [cnpj, setCnpj] = useState(supplier?.cnpj || '');
   const [email, setEmail] = useState(supplier?.email || '');
   const [telefone, setTelefone] = useState(supplier?.telefone || '');
-  //const [produtos, setProdutos] = useState(supplier?.produtos || []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!nome || !endereco || !cnpj || !email || !telefone) {
-      //alert('Por favor, preencha todos os campos obrigatórios.');
       Swal.fire({
         text: 'Por favor, preencha todos os campos obrigatórios.',
         icon: 'warning',
@@ -32,12 +30,10 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
       cnpj,
       email,
       telefone,
-      //produtos,
     };
 
     if (isEditing) {
       onSave(fornecedorAtualizado);
-      //alert(`Fornecedor "${nome}" atualizado com sucesso!`);
       Swal.fire({
         text: `Fornecedor "${nome}" atualizado com sucesso!`,
         icon: 'success',
@@ -62,7 +58,6 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
         })
         .then((data) => {
           console.log('Fornecedor cadastrado:', data);
-          //alert(`Fornecedor "${data.nome}" cadastrado com sucesso!`);
           Swal.fire({
             text: `Fornecedor "${data.nome}" cadastrado com sucesso!`,
             icon: 'success',
@@ -74,13 +69,11 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
           setCnpj('');
           setEmail('');
           setTelefone('');
-          //setProdutos([]);
           
           onClose();
         })
         .catch((error) => {
           console.error('Erro ao cadastrar o fornecedor:', error);
-          //alert(error.message || 'Erro ao cadastrar o fornecedor. Tente novamente!');
           Swal.fire({
             text: 'Erro ao cadastrar o fornecedor. Tente novamente!',
             icon: 'error',
@@ -121,7 +114,7 @@ function AdicionarFornecedor({ supplier, isEditing, onClose, onSave }) {
           <label>CNPJ</label>
           <input
             type="text"
-            placeholder="CNPJ"
+            placeholder="CNPJ no formato: xx.xxx.xxx/xxxx-xx"
             value={cnpj}
             onChange={(e) => setCnpj(e.target.value)}
           />
