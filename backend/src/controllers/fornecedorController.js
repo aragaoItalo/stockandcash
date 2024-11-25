@@ -1,4 +1,5 @@
 const Fornecedor = require('../models/fornecedor');
+//const Produto = require('../models/produto');
 
 //Cria o fornecedor
 exports.createFornecedor = async (req, res) => {
@@ -6,21 +7,58 @@ exports.createFornecedor = async (req, res) => {
         const fornecedor = await Fornecedor.create(req.body);
         res.status(201).json(fornecedor);
     } catch (err) {
+        console.error('Erro ao criar fornecedor:', err);
         res.status(500).json({ error: 'Erro ao criar novo Fornecedor'});
     }
 };
 
 // Lista os produtos
+/*exports.getAllFornecedores = async (req, res) => {
+    try {
+        const fornecedores = await Fornecedor.findAll({
+            include: {
+                model: Produto,
+                as: 'produtos',
+                attributes: ['id', 'nome']
+            }
+        });
+        res.status(200).json(fornecedores);
+    } catch (err) {
+        console.error('Erro ao buscar fornecedores:', err);
+        res.status(500).json({ error: 'Erro ao listar fornecedores', detalhes: err.message });
+    }
+};*/
+
 exports.getAllFornecedores = async (req, res) => {
     try {
-        const fornecedor = await Fornecedor.findAll();
-        res.status(200).json(fornecedor);
+        const fornecedores = await Fornecedor.findAll();
+        res.status(200).json(fornecedores);
     } catch (err) {
-        res.status(500).json({ error: 'Erro ao listar fornecedores' });
+        console.error('Erro ao buscar fornecedores:', err);
+        res.status(500).json({ error: 'Erro ao listar fornecedores', detalhes: err.message });
     }
 };
 
 //Busca pelo id
+/*exports.getFornecedorById = async (req, res) => {
+    try {
+        const fornecedor = await Fornecedor.findByPk(req.params.id, {
+            include: {
+                model: Produto,
+                as: 'produtos',
+                attributes: ['id', 'nome']
+            }
+        });
+        if (!fornecedor) {
+            return res.status(404).json({ error: 'Fornecedor não encontrado' });
+        }
+        res.status(200).json(fornecedor);
+    } catch (err) {
+        console.error('Erro ao buscar fornecedor por ID:', err);
+        res.status(500).json({ error: 'Erro ao buscar fornecedor', detalhes: err.message });
+    }
+};*/
+
 exports.getFornecedorById = async (req, res) => {
     try {
         const fornecedor = await Fornecedor.findByPk(req.params.id);
@@ -29,7 +67,8 @@ exports.getFornecedorById = async (req, res) => {
         }
         res.status(200).json(fornecedor);
     } catch (err) {
-        res.status(500).json({ error: 'Erro ao buscar fornecedor'});
+        console.error('Erro ao buscar fornecedor por ID:', err);
+        res.status(500).json({ error: 'Erro ao buscar fornecedor', detalhes: err.message });
     }
 };
 

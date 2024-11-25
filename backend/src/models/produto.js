@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
-const Fornecedor = require('./fornecedor.js');
-
+//const Fornecedor = require('./fornecedor.js');
 
 const Produto = sequelize.define('Produto', {
     nome: {
@@ -27,17 +26,15 @@ const Produto = sequelize.define('Produto', {
     descricao: {
         type: DataTypes.TEXT,
         allowNull: false
-    }/*,
-    imagem: {
-        type: DataTypes.STRING,
-        allowNull: true
-    }*/
+    }
 });
 
 //RELACIONAR PRODUTO X FORNECEDOR
-//Produto.belongsTo(Fornecedor, {
-//    foreignKey: 'fornecedorID'
-//});
-
+/*
+Produto.belongsTo(Fornecedor, {
+    foreignKey: 'fornecedorId', // Nome da chave estrangeira
+    as: 'fornecedor' // Nome do relacionamento (alias)
+});
+*/
 
 module.exports = Produto;
