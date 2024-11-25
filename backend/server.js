@@ -1,25 +1,19 @@
 //Carregar variaveis de ambiente
 require('dotenv').config();
 
+//Modelos
+const Cliente = require('./src/models/cliente.js');
+const Fornecedor = require('./src/models/fornecedor.js');
+const Produto = require('./src/models/produto.js');
+
 //Import Pacotes e Módulos
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./src/config/db.js');
 const authRoutes = require('./src/routes/authRoutes');
-const Cliente = require('./src/models/cliente.js');
-const Fornecedor = require('./src/models/fornecedor.js');
-const Produto = require('./src/models/produto.js');
-const Pedido = require('./src/models/pedido.js');
-const itemPedido = require('./src/models/itemPedido.js');
-const Carrinho = require('./src/models/carrinho.js');
-const itemCarrinho = require('./src/models/itemCarrinho.js');
-const Pagamento = require('./src/models/pagamento.js');
-const Notificacao = require('./src/models/notificacao.js');
-
-//Import routes
 const clienteRoutes = require('./src/routes/clienteRoutes.js');
 const produtoRoutes = require('./src/routes/produtoRoutes.js');
-const fornecedorRoutes = require('./src/routes/fornecedorRoutes.js')
+const fornecedorRoutes = require('./src/routes/fornecedorRoutes.js');
 
 //Config Express
 const app = express();
@@ -44,7 +38,7 @@ app.listen(port, () => {
 });
 
 //SINCRONIZAR COM O DB
-sequelize.sync({ alter: true }) //ALTER:TRUE ajustar tabela sem perder dados
+sequelize.sync() //ALTER:TRUE ajustar tabela sem perder dados
     .then(() => {
         console.log('Tabelas sincronizadas com sucesso!');
     })
