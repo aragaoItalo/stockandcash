@@ -13,7 +13,8 @@ const Dashboard = () => {
       <Sidebar />
       <div className="dashboard-main-content">
         <div className="dashboard-cards">
-          
+          <ResumoEstoque />
+          <Grafico />
         </div>
       </div>
     </div>

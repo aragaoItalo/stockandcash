@@ -1,50 +1,69 @@
-/* Contêiner do gráfico com fundo */
 .grafico-container {
-    display: flex;
-    justify-content: flex-start; /* Alinha os itens à esquerda */
-    gap: 16px;
-    padding: 16px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    flex-wrap: wrap;
-    width: 100%;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0px 0px 20px;
+  position: absolute;
+  top: 50vh;
+  left: 75vh;
+  display: flex;
+  align-items: center; /* Centraliza verticalmente o conteúdo */
+  justify-content: flex-end; /* Garante que o conteúdo fique na direita */
+  gap: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transição suave */
+}
+
+.grafico-legend {
+  text-align: center; /* Alinha o texto ao centro dentro do bloco */
+  display: flex;
+  flex-direction: column; /* Organiza os itens verticalmente */
+  gap: 10px; /* Adiciona espaço entre os itens */
+  margin-right: 20px;
+  transition: transform 0.8s ease-in-out;
+}
+
+.grafico-card{
+  width: 150px;
+}
+
+
+.grafico-legend :hover {
+  transform: scale(1.1);
+  color: #6a0dad;
+}
+
+/* Efeito de hover no container */
+.grafico-container:hover {
+  transform: scale(1.1);  /* Expande o container */
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.4);  /* Aumenta a sombra para dar mais destaque */
+}
+
+@media (max-width: 1280px) {
+  .grafico-container {
+    /* Estilos para larguras menores que 1280px */
   }
-  
-  /* Estilo do gráfico */
-  .grafico-card {
-    width: 220px; /* Reduzido o tamanho do card */
-    height: 220px;
-    position: relative;
-    transition: transform 0.3s ease; /* Adiciona transição para hover */
-    margin-bottom: 16px;
+}
+
+@media (max-width: 939px) {
+  .grafico-container{
+      position: absolute;
+      animation: moveGraph 0.5s ease-out forwards;
   }
-  
-  .grafico-card:hover {
-    transform: scale(1.05); /* Efeito de zoom no hover */
+
+  @keyframes moveGraph {
+    0% {
+      left: 75vw;
+      top: 50vh;
+    }
+
+    10% {
+      left: 75vw;
+      top: 75vh;
+    }
+    
+    100% {
+      left: 36vw; /* Move para 90% da largura da viewport */
+      top: 70vh;  /* Move para 70% da altura da viewport */
+    }
   }
-  
-  /* Legenda ao lado do gráfico */
-  .grafico-legend {
-    font-size: 0.9rem;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-align: left;
-    margin-top: 8px;
-  }
-  
-  /* Cada item da legenda com a cor e o valor */
-  .grafico-legend div {
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Caixa colorida ao lado da legenda */
-  .grafico-legend .color-box {
-    width: 12px;
-    height: 12px;
-    margin-right: 8px;
-    border-radius: 2px;
-  }
-  
+}
