@@ -1,133 +1,68 @@
 const Pedido = require('../models/pedido');
-const ItemPedido = require('../models/itemPedido');
+const Produto = require('../models/produto');
 
-// Cria pedido
-exports.createPedido = async (req, res) => {
-    try {
-        const { clienteId, itens, total } = req.body; // Assumindo que `itens` e `total` são fornecidos
-        const pedido = await Pedido.create({ clienteId, total });
-        
-        // Cria os itens do pedido
-        const itensCriados = await Promise.all(
-            itens.map(async (item) => {
-                return await ItemPedido.create({
-                    pedidoId: pedido.id,
-                    produtoId: item.produtoId,
-                    quantidade: item.quantidade,
-                    preco: item.preco
-                });
-            })
-        );
-        
-        res.status(201).json({ pedido, itensCriados });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erro ao criar pedido' });
+const criarPedido = async (req, res) => {
+  const { cliente, telefone, endereco, produtos } = req.body;
+
+  try {
+    //Valida os dados
+    if (!cliente || !telefone || !endereco || !produtos || produtos.length === 0) {
+      return res.status(400).json({ message: 'Dados do pedido incompletos.' });
     }
-};
 
-// Obtem todos os pedidos
-exports.getAllPedidos = async (req, res) => {
-    try {
-        const pedidos = await Pedido.findAll({
-            include: [ItemPedido] // Inclui itens do pedido na resposta
+    let total = 0;
+
+    // Verifica estoque e atualiza
+    for (const item of produtos) {
+      const produto = await Produto.findByPk(item.id);
+
+      if (!produto) {
+        return res.status(404).json({ message: `Produto com ID ${item.id} não encontrado.` });
+      }
+
+      if (produto.quantidade < item.quantidade) {
+        return res.status(400).json({
+          message: `Estoque insuficiente para o produto: ${produto.nome}. Disponível: ${produto.quantidade}`,
         });
-        res.status(200).json(pedidos);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erro ao buscar pedidos' });
+      }
+
+    // Calcula o total do pedido (preço * quantidade)
+    const itemTotal = produto.preco * item.quantidade;
+      
+    if (isNaN(itemTotal)) {
+      return res.status(400).json({ message: `Preço ou quantidade inválida para o produto ${produto.nome}.` });
     }
+
+    total += itemTotal;  
+
+    //Atualiza estoque
+    produto.quantidade -= item.quantidade;
+    await produto.save();
+  }
+
+    //Cria pedido
+    const novoPedido = await Pedido.create({
+      cliente,
+      telefone,
+      endereco,
+      produtos,
+      total,
+      data: new Date(),
+      //Armazena produtos no pedido
+      produtos: produtos.map(item => ({
+        produtoId: item.id,
+        quantidade: item.quantidade,
+        preco: item.preco,
+      })),
+    });
+
+    res.status(201).json({ message: 'Pedido criado com sucesso.', pedido: novoPedido });
+  } catch (error) {
+    console.error('Erro ao criar o pedido:', error);
+    res.status(500).json({ message: 'Erro interno do servidor.' });
+  }
 };
 
-// Obtem pedido pelo id
-exports.getPedidoById = async (req, res) => {
-    try {
-        const pedido = await Pedido.findByPk(req.params.id, {
-            include: [ItemPedido]
-        });
-        if (!pedido) {
-            return res.status(404).json({ error: 'Pedido não encontrado' });
-        }
-        res.status(200).json(pedido);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erro ao buscar o pedido' });
-    }
-};
-
-// Atualiza um pedido (adiciona item, altera quantidade)
-exports.updatePedido = async (req, res) => {
-    try {
-        const { clienteId, total, itens } = req.body;
-        const pedido = await Pedido.findByPk(req.params.id);
-
-        if (!pedido) {
-            return res.status(404).json({ error: 'Pedido não encontrado' });
-        }
-
-        // Atualiza o pedido
-        await pedido.update({ clienteId, total });
-
-        // Atualiza os itens do pedido
-        const updatedItens = await Promise.all(
-            itens.map(async (item) => {
-                const itemExistente = await ItemPedido.findOne({
-                    where: { id: item.id, pedidoId: pedido.id }
-                });
-                if (itemExistente) {
-                    return await itemExistente.update({
-                        quantidade: item.quantidade,
-                        preco: item.preco
-                    });
-                } else {
-                    return await ItemPedido.create({
-                        pedidoId: pedido.id,
-                        produtoId: item.produtoId,
-                        quantidade: item.quantidade,
-                        preco: item.preco
-                    });
-                }
-            })
-        );
-
-        res.status(200).json({ pedido, updatedItens });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erro ao atualizar o pedido' });
-    }
-};
-
-// Atualiza o status de um pedido (adm)
-exports.updateStatus = async (req, res) => {
-    try {
-        const { status } = req.body;
-        const pedido = await Pedido.findByPk(req.params.id);
-
-        if (!pedido) {
-            return res.status(404).json({ error: 'Pedido não encontrado' });
-        }
-
-        await pedido.update({ status });
-        res.status(200).json({ message: 'Status do pedido atualizado', pedido });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erro ao atualizar o status do pedido' });
-    }
-};
-
-// Deleta pedido
-exports.deletePedido = async (req, res) => {
-    try {
-        const pedido = await Pedido.findByPk(req.params.id);
-
-        if (!pedido) {
-            return res.status(404).json({ error: 'Pedido não encontrado' });
-        }
-
-        await pedido.destroy();
-        res.status(200).json({ message: 'Pedido deletado com sucesso' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erro ao deletar o pedido' });
-    }
+module.exports = {
+  criarPedido,
 };

@@ -7,16 +7,32 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
   const [cliente, setCliente] = useState("");
   const [telefone, setTelefone] = useState("");
   const [endereco, setEndereco] = useState("");
+  const [produtosDisponiveis, setProdutosDisponiveis] = useState([]);
   const [produtosSelecionados, setProdutosSelecionados] = useState([]);
   const [total, setTotal] = useState(0);
 
   //Seleciona os produtos
-  const produtosDisponiveis = [
+  /*const produtosDisponiveis = [
     { id: 1, nome: "Heineken Long Neck", preco: 5 },
     { id: 2, nome: "Tanqueray", preco: 5 },
     { id: 3, nome: "51 ICE Limão", preco: 5 },
     { id: 4, nome: "CanelaZinha", preco: 5 },
-  ];
+  ];*/
+
+  // Carregar produtos do backend
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/produtos");
+        const produtos = await response.json();
+        setProdutosDisponiveis(produtos); // Atualiza a lista de produtos
+      } catch (error) {
+        console.error("Erro ao carregar os produtos:", error);
+      }
+    };
+
+    fetchProdutos();
+  }, []);
 
   //Atualiza total sempre que a lista de produtos selecionados for alterada
   useEffect(() => {
@@ -67,7 +83,7 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
     );
   };
 
-  const handleSubmit = () => {
+  /*const handleSubmit = () => {
     const novoPedido = {
       id: idCounter++,
       cliente,
@@ -75,6 +91,26 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
       endereco,
       produtos: produtosSelecionados,
       total,
+      data: new Date().toLocaleDateString(),
+    };
+
+    adicionarPedido(novoPedido);
+    closeModal();
+  };*/
+
+  const handleSubmit = () => {
+    const novoPedido = {
+      id: idCounter++,
+      cliente,
+      telefone,
+      endereco,
+      produtos: produtosSelecionados.map((produto) => ({
+        id: produto.id,
+        nome: produto.nome,
+        quantidade: produto.quantidade,
+        preco: produto.preco,
+      })),
+      total: parseFloat(total),
       data: new Date().toLocaleDateString(),
     };
 

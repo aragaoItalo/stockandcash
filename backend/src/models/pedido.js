@@ -1,24 +1,35 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db.js'); 
-const Cliente = require('./cliente.js');
+const sequelize = require('../config/db.js');
 
 
 const Pedido = sequelize.define('Pedido', {
-    status: {
-        type: DataTypes.ENUM('Pendente', 'Em processamento', 'Enviado', 'Entregue'),
-        defaultValue: 'Pendente',
-        allowNull: false
+    cliente: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    telefone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    endereco: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    produtos: {
+      type: DataTypes.JSON, 
+      allowNull: false,
     },
     total: {
-        type: DataTypes.FLOAT,
-        allowNull: false
-    }
-});
-
-//RELACIONAR PEDIDO QUE PERTENCE AO CLIENTE
-Pedido.belongsTo(Cliente, {
-    foreignKey: 'clienteId'
-});
-
-
-module.exports = Pedido;
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+      validate: {
+        isDecimal: true,
+      },
+    },
+    data: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+  });
+  
+  module.exports = Pedido;  

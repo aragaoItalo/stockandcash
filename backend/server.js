@@ -14,6 +14,7 @@ const authRoutes = require('./src/routes/authRoutes');
 const clienteRoutes = require('./src/routes/clienteRoutes.js');
 const produtoRoutes = require('./src/routes/produtoRoutes.js');
 const fornecedorRoutes = require('./src/routes/fornecedorRoutes.js');
+const pedidosRoutes = require('./src/routes/pedidosRoutes');
 
 //Config Express
 const app = express();
@@ -26,6 +27,7 @@ app.use('/auth', authRoutes);
 app.use('/clientes', clienteRoutes);
 app.use('/produtos', produtoRoutes);
 app.use('/fornecedores', fornecedorRoutes);
+app.use('/pedidos', pedidosRoutes);
 
 //Rota Simples p teste do server
 app.get('/', (req, res) => {
