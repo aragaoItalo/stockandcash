@@ -10,7 +10,7 @@ import Fornecedores from './Components/Fornecedores/fornecedores';
 import AdicionarFornecedor from './Components/adicionarFornecedores/cadastroFornecedor';
 import Grafico from './Components/Dashboard/cards/grafico';
 import Pedidos from './Components/Pedidos/Pedidos';
-import Fechamento from './Components/Fechamento/Fechamento';
+
 const App = () => {
     return (
         <Router>
@@ -24,7 +24,6 @@ const App = () => {
                 <Route path="/Sidebar" element={<Sidebar />} />
                 <Route path="/fornecedores" element={<Fornecedores />} />
                 <Route path="/adicionarFornecedores" element={<AdicionarFornecedor />} />
-                <Route path="/fechamento" element={<Fechamento />} />
                 <Route path="/grafico" element={<Grafico />} />
                 <Route path="/pedidos" element={<Pedidos />} />
             </Routes>
