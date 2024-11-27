@@ -22,6 +22,14 @@
   }
 }
 
+@media (max-width: 990px){
+  .resumo-estoque-card {
+    position: relative;
+    right: 13vw;
+    top: 47vh;
+  }
+}
+
 @media (max-width: 939px) {
   .resumo-estoque-card{
       position: absolute;
@@ -30,8 +38,8 @@
 
   @keyframes moveStockCard {
     0% {
-      left: 20vw;
-      top: 48vh;
+      left: 36vw;
+      top: 47vh;
     }
     100% {
       left: 36vw; /* Move para 90% da largura da viewport */
@@ -43,18 +51,35 @@
 @media (max-width: 605px) {
   .resumo-estoque-card{
       position: absolute;
+      left: 36vw;
+      top: 35vh;
+      animation: moveStockCard-min 0.5s ease-out forwards;
+  }
+
+  @keyframes moveStockCard-min {
+    100% {
+      left: 36vw;
+      top: 35vh;
+    }
+  }
+}
+
+@media (max-width: 452px) {
+  .resumo-estoque-card{
+      position: absolute;
+
       animation: moveStockCard-min 0.5s ease-out forwards;
   }
 
   @keyframes moveStockCard-min {
     0% {
-      left: 20vw;
-      top: 52vh;
+      left: 36vw;
+      top: 35vh;
     }
+    
     100% {
-      left: 36vw; /* Move para 90% da largura da viewport */
-      top: 35vh;  /* Move para 70% da altura da viewport */
-      
+      left: 36vw;
+      top: 32vh;
     }
   }
 }

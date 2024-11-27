@@ -44,10 +44,19 @@
   }
 }
 
+@media (max-width: 990px){
+  .grafico-container {
+    position: absolute;
+    top: 50vh;
+    left: 75vh;
+  }
+}
+
 @media (max-width: 939px) {
   .grafico-container{
       position: absolute;
       animation: moveGraph 0.5s ease-out forwards;
+      
   }
 
   @keyframes moveGraph {
@@ -66,4 +75,52 @@
       top: 70vh;  /* Move para 70% da altura da viewport */
     }
   }
+}
+
+@media (max-width: 632px) {
+  .grafico-container{
+    position: absolute;
+    animation: moveGraph 0.5s ease-out forwards;
+    display: flex;
+    flex-direction: column; /* Alinha os itens na vertical (um acima do outro) */
+    align-items: center;    /* Centraliza os itens horizontalmente */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    gap: 40px;              /* Espaço entre os itens */
+    width: 247px;
+  }
+
+  @keyframes moveGraph {
+    0% {
+      left: 75vw;
+      top: 50vh;
+    }
+
+    10% {
+      left: 75vw;
+      top: 75vh;
+    }
+    
+    100% {
+      left: 34vw; /* Move para 90% da largura da viewport */
+      top: 70vh;  /* Move para 70% da altura da viewport */
+    }
+
+  }
+
+  @media (max-width: 493px) {
+    .grafico-container{
+      position: absolute;
+      
+      animation: moveGraph 0.5s ease-out forwards;
+      display: flex;
+      flex-direction: column; /* Alinha os itens na vertical (um acima do outro) */
+      align-items: center;    /* Centraliza os itens horizontalmente */
+      justify-content: center; /* Centraliza os itens verticalmente */
+      gap: 40px;              /* Espaço entre os itens */
+      width: 177px;
+      
+    }
+
+  }
+
 }
