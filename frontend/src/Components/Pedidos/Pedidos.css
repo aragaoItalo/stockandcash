@@ -1,91 +1,143 @@
+/* Estilos gerais */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    width: 80%; /* Retornado ao valor original */
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .button-container button {
-    background-color: #6200ee;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .button-container button i {
-    margin-left: 10px;
-  }
-  
-  .search-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-container input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-  }
-  
-  .search-container button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: black;
-  }
-  
-  .divider {
-    border-top: 1px solid #ddd;
-    margin: 20px 0;
-  }
-  
-  table {
-    width: 100%; /* A largura da tabela se ajusta ao contêiner */
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 30px; /* Mantém o comprimento ampliado */
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    min-height: 80px; /* Mantém a altura mínima das linhas */
-  }
-  
-  th {
-    background-color: #f9f9f9;
-    font-weight: normal;
-  }
-  
-  .checkbox {
-    text-align: center;
-  }
-  
-  .product-info {
-    display: flex;
-    align-items: center;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%; /* Retornado ao valor original */
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Container do botão */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.button-container button {
+  background-color: #6200ee;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-container button i {
+  margin-left: 10px;
+}
+
+/* Estilos da barra de pesquisa */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-container input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.search-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: black;
+}
+
+/* Divisores */
+.divider {
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+/* Estilos da tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 30px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  min-height: 80px;
+}
+
+th {
+  background-color: #f9f9f9;
+  font-weight: normal;
+}
+
+.checkbox {
+  text-align: center;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para os itens de pedido */
+.pedido-item {
+  display: flex;
+  justify-content: space-between; /* Distribui os itens uniformemente */
+  align-items: center; /* Alinha os itens verticalmente */
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.pedido-item p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.pedido-item button {
+  background-color: #6200ee;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block; /* Certifica-se de que o botão esteja no mesmo nível */
+  text-align: center;
+}
+
+/* Estilo específico para o botão "Exibir" */
+.pedido-item .exibir-btn {
+  margin-left: auto; /* Empurra o botão para o final da linha */
+}
+
+.pedido-item .exibir-btn button {
+  padding: 10px 20px; /* Ajuste do padding para ficar proporcional aos outros botões */
+  font-size: 16px;
+  background-color: #6200ee;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Ajustes adicionais */
+.pedido-lista {
+  margin-top: 20px;
+}

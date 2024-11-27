@@ -21,6 +21,7 @@
     "mysql2": "^3.11.3",
     "prop-types": "^15.8.1",
     "sequelize": "^6.37.4",
+    "stock-and-cash": "file:",
     "stripe": "^16.12.0"
   }
 }
