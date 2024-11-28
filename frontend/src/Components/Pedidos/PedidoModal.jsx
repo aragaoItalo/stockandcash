@@ -11,15 +11,7 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
   const [produtosSelecionados, setProdutosSelecionados] = useState([]);
   const [total, setTotal] = useState(0);
 
-  //Seleciona os produtos
-  /*const produtosDisponiveis = [
-    { id: 1, nome: "Heineken Long Neck", preco: 5 },
-    { id: 2, nome: "Tanqueray", preco: 5 },
-    { id: 3, nome: "51 ICE Limão", preco: 5 },
-    { id: 4, nome: "CanelaZinha", preco: 5 },
-  ];*/
-
-  // Carregar produtos do backend
+  //Carrega produtos do estoque
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
@@ -82,21 +74,6 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
       prev.filter((produto) => produto.id !== produtoId)
     );
   };
-
-  /*const handleSubmit = () => {
-    const novoPedido = {
-      id: idCounter++,
-      cliente,
-      telefone,
-      endereco,
-      produtos: produtosSelecionados,
-      total,
-      data: new Date().toLocaleDateString(),
-    };
-
-    adicionarPedido(novoPedido);
-    closeModal();
-  };*/
 
   const handleSubmit = () => {
     const novoPedido = {
