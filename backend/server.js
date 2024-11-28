@@ -40,7 +40,7 @@ app.listen(port, () => {
 });
 
 //SINCRONIZAR COM O DB
-sequelize.sync() //ALTER:TRUE ajustar tabela sem perder dados
+sequelize.sync({ alter: true }) //ALTER:TRUE ajustar tabela sem perder dados
     .then(() => {
         console.log('Tabelas sincronizadas com sucesso!');
     })
