@@ -5,7 +5,7 @@
   box-shadow: 0px 0px 20px;
   position: absolute;
   top: 50vh;
-  left: 75vh;
+  left: 50vw;
   display: flex;
   align-items: center; /* Centraliza verticalmente o conteúdo */
   justify-content: flex-end; /* Garante que o conteúdo fique na direita */

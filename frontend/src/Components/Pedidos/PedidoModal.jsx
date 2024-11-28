@@ -164,7 +164,7 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
               />
             </div>
 
-            <h3>Selecionar Produtos</h3>
+            <h3 className="selecionar-produtos'">Selecionar Produtos</h3>
             <div className="produto-container">
               {produtosDisponiveis.map((produto) => (
                 <div key={produto.id} className="produto">
@@ -180,7 +180,7 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
               ))}
             </div>
 
-            <h3>Resumo do Pedido</h3>
+            <h3 className="resumo-pedido-text">Resumo do Pedido</h3>
             <div className="pedido-resumo">
               <table>
                 <thead>
