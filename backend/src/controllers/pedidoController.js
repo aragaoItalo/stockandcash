@@ -4,6 +4,9 @@ const Produto = require('../models/produto');
 const criarPedido = async (req, res) => {
   const { cliente, telefone, endereco, produtos } = req.body;
 
+  console.log("Produtos recebidos:", produtos);
+  console.log(req.body);
+
   try {
     //Valida os dados
     if (!cliente || !telefone || !endereco || !produtos || produtos.length === 0) {
@@ -12,7 +15,7 @@ const criarPedido = async (req, res) => {
 
     let total = 0;
 
-    // Verifica estoque e atualiza
+    //Verifica estoque e atualiza
     for (const item of produtos) {
       const produto = await Produto.findByPk(item.id);
 
@@ -26,14 +29,8 @@ const criarPedido = async (req, res) => {
         });
       }
 
-    // Calcula o total do pedido (preço * quantidade)
-    const itemTotal = produto.preco * item.quantidade;
-      
-    if (isNaN(itemTotal)) {
-      return res.status(400).json({ message: `Preço ou quantidade inválida para o produto ${produto.nome}.` });
-    }
-
-    total += itemTotal;  
+    //Calcula total do pedido
+    total += produto.preco * item.quantidade;
 
     //Atualiza estoque
     produto.quantidade -= item.quantidade;
@@ -48,12 +45,6 @@ const criarPedido = async (req, res) => {
       produtos,
       total,
       data: new Date(),
-      //Armazena produtos no pedido
-      produtos: produtos.map(item => ({
-        produtoId: item.id,
-        quantidade: item.quantidade,
-        preco: item.preco,
-      })),
     });
 
     res.status(201).json({ message: 'Pedido criado com sucesso.', pedido: novoPedido });

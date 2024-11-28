@@ -106,9 +106,7 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
       endereco,
       produtos: produtosSelecionados.map((produto) => ({
         id: produto.id,
-        nome: produto.nome,
         quantidade: produto.quantidade,
-        preco: produto.preco,
       })),
       total: parseFloat(total),
       data: new Date().toLocaleDateString(),
