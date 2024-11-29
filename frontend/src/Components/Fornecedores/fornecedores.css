@@ -1,27 +1,27 @@
 
   
-  .content {
+  .content-fornecedores {
     padding: 20px;
     flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
   }
   
-  .header {
+  .header-fornecedores {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   
-  .header h1 {
+  .header-fornecedores h1 {
     font-size: 24px;
     font-weight: bold;
   }
   
-  .header .buttons {
+  .header-fornecedores .buttons-fornecedores {
     display: flex;
     gap: 10px;
   }
   
-  .header .buttons button {
+  .header-fornecedores .buttons-fornecedores button {
     background-color: #fff;
     border: 2px solid #ccc; /* espessura da borda */
     border-radius: 10px;
@@ -33,50 +33,35 @@
     transition: background-color 0.3s;
   }
   
-  .header .buttons button:hover {
+  .header-fornecedores .buttons-fornecedores button:hover {
     background-color: #f0f0f0; /* cor de fundo ao passar o mouse */
   }
   
-  .header .buttons button i {
+  .header-fornecedores .buttons-fornecedores button i {
     font-size: 16px;
   }
   
-  .header .filter {
+  .header-fornecedores .filter {
     display: flex;
     align-items: center;
     gap: 5px;
     cursor: pointer;
   }
   
-  .header .filter i {
+  .header-fornecedores .filter i {
     font-size: 16px;
   }
   
   .fornecedor-table {
-    width: 100%; /* Largura total da tabela */
-    border-collapse: collapse; /* Remove espaçamento entre as células */
-    margin-top: 20px;
+    
+    background-color: #dfdfdf;
   }
-  
-  .fornecedor-table th,
-  .fornecedor-table td {
-    padding: 15px;
-    text-align: left;
-    border: 2px solid #ccc;
-    border-radius: 5px;
+
+  th, td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.349);
   }
-  
-  .product-table th {
-    background-color: #f9f9f9;
-    border-bottom: 2px solid #000;
-  }
-  
-  .product-table td {
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .product-table img {
-    width: 50px; 
-    height: 50px; 
-    object-fit: cover; /* Corta a imagem para caber no espaço */
+
+  tr:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.349);
+    background-color: #b957ff3b;
   }

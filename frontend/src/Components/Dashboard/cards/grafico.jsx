@@ -1,33 +1,49 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import './Grafico.css'; 
+import './Grafico.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Grafico = () => {
   const [data, setData] = useState({
-    labels: ['Produto A', 'Produto B', 'Produto C', 'Produto D'],
+    labels: [],
     datasets: [
       {
-        data: [10, 20, 30, 40],
-        backgroundColor: ['#6a0dad', '#D51EDC', '#248CD8', '#2830DC'],
+        data: [],
+        backgroundColor: ['#6a0dad', '#D51EDC', '#248CD8', '#2830DC'], // Ajuste de cores para 4 itens
       },
     ],
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      setData(prevData => ({
-        ...prevData,
-        datasets: [
-          {
-            ...prevData.datasets[0],
-            data: [25, 15, 40, 20],
-          },
-        ],
-      }));
-    }, 3000);
+    const fetchProductData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/produtos'); // Endpoint para buscar os produtos
+        const produtos = response.data;
+
+        // Ordenar produtos pela quantidade e selecionar os 4 maiores
+        const topProdutos = produtos
+          .sort((a, b) => b.quantidade - a.quantidade)
+          .slice(0, 4);
+
+        // Atualizar dados do gráfico
+        setData({
+          labels: topProdutos.map((produto) => produto.nome),
+          datasets: [
+            {
+              data: topProdutos.map((produto) => produto.quantidade),
+              backgroundColor: ['#6a0dad', '#D51EDC', '#248CD8', '#2830DC'], // Cores ajustadas
+            },
+          ],
+        });
+      } catch (error) {
+        console.error('Erro ao buscar os dados dos produtos:', error);
+      }
+    };
+
+    fetchProductData();
   }, []);
 
   const options = {
@@ -36,11 +52,15 @@ const Grafico = () => {
     plugins: {
       tooltip: {
         callbacks: {
-          label: tooltipItem => `${tooltipItem.label}: ${tooltipItem.raw}%`,
+          label: (tooltipItem) => {
+            const label = tooltipItem.label || '';
+            const value = tooltipItem.raw || 0;
+            return `${label}: ${value}`;
+          },
         },
       },
       legend: {
-        display: false,
+        display: false, // Oculta legenda embutida
       },
     },
   };
@@ -57,7 +77,7 @@ const Grafico = () => {
               className="color-box"
               style={{ backgroundColor: data.datasets[0].backgroundColor[index] }}
             ></div>
-            Produto {label.split(' ')[1]}: <span>{data.datasets[0].data[index]}%</span>
+            {label}: {data.datasets[0].data[index]}
           </div>
         ))}
       </div>

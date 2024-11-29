@@ -130,10 +130,10 @@ const Fornecedores = () => {
       {/* Sidebar */}      
       <Sidebar />
       {/* Content */}
-      <div className="content">
-        <div className="header">
+      <div className="content-fornecedores">
+        <div className="header-fornecedores">
           <h1>Fornecedores</h1>
-          <div className="buttons">
+          <div className="buttons-fornecedores">
             <button onClick={openModal}>
               <FaPlus />
               Adicionar fornecedores
@@ -156,7 +156,7 @@ const Fornecedores = () => {
         </div>
         <table className="fornecedor-table">
           <thead>
-            <tr>
+            <tr className="teste-table">
               <th></th>
               <th>ID</th>
               <th>Nome</th>

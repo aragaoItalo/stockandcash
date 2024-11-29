@@ -10,6 +10,7 @@ import Fornecedores from './Components/Fornecedores/fornecedores';
 import AdicionarFornecedor from './Components/adicionarFornecedores/cadastroFornecedor';
 import Grafico from './Components/Dashboard/cards/grafico';
 import Pedidos from './Components/Pedidos/Pedidos';
+import Categorias from './Components/Dashboard/cards/categorias';
 
 const App = () => {
     return (
@@ -26,6 +27,8 @@ const App = () => {
                 <Route path="/adicionarFornecedores" element={<AdicionarFornecedor />} />
                 <Route path="/grafico" element={<Grafico />} />
                 <Route path="/pedidos" element={<Pedidos />} />
+                <Route path="/categorias" element={<Categorias />} />
+                <Route path="/grafico" element={<Grafico />} />
             </Routes>
         </Router>
     );

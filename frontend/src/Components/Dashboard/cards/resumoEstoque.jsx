@@ -9,6 +9,7 @@ const ResumoEstoque = () => {
         <p><strong>Total de Produtos:</strong> 150</p>
         <p><strong>Itens em Falta:</strong> 5</p>
         <p><strong>Última Atualização:</strong> 10/11/2024</p>
+
       </div>
     </div>
   );
