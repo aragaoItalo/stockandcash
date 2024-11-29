@@ -76,6 +76,13 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
   };
 
   const handleSubmit = async () => {
+
+    // Verifica se o cliente foi preenchido e ao menos um produto foi selecionado
+    if (!cliente || produtosSelecionados.length === 0) {
+      alert("É necessário cadastrar um cliente e selecionar ao menos um produto.");
+      return;
+    }
+
     const novoPedido = {
       id: idCounter++,
       cliente,
@@ -109,6 +116,8 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
     closeModal();
   };
 
+  const produtos = selectedPedido?.produtos || []
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -120,13 +129,13 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
             <p><strong>Cliente:</strong> {selectedPedido .cliente}</p>
             <p><strong>Telefone:</strong> {selectedPedido.telefone}</p>
             <p><strong>Endereço:</strong> {selectedPedido.endereco}</p>
-            <p><strong>Data:</strong> {selectedPedido .data}</p>
-            <p><strong>Total:</strong> R$ {selectedPedido .valorTotal.toFixed(2)}</p>
+            <p><strong>Data:</strong> {new Date(selectedPedido.data).toLocaleDateString('pt-BR')}</p>
+            <p><strong>Total:</strong> R$ {selectedPedido.total}</p>
             <h3>Resumo do Pedido</h3>
             <ul>
-              {selectedPedido .produtos.map((produto) => (
+              {produtos.map((produto) => (
                 <li key={produto.id}>
-                  {produto.nome} - Quantidade: {produto.quantidade} - Preço Total: R$ {(produto.preco * produto.quantidade).toFixed(2)}
+                  {produto.nome} - Quantidade: {produto.quantidade} - Preço Total: R$ {produto.ItemPedido?.valorTotal?.toFixed(2)}
                 </li>
               ))}
             </ul>
@@ -202,7 +211,7 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
                       </td>
                       <td>{produto.preco.toFixed(2)}</td>
                       <td>
-                        {(produto.preco * produto.quantidade).toFixed(2)}
+                        {produto.ItemPedido?.valorTotal?.toFixed(2)}
                       </td>
                       <td>
                         <button onClick={() => excluirProduto(produto.id)}>
