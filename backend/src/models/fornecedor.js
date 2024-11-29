@@ -1,8 +1,13 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../config/db');
-//const Produto = require('./produto')
 
 const Fornecedor = sequelize.define('Fornecedor', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
     nome: {
         type: DataTypes.STRING,
         allowNull: false
@@ -24,12 +29,5 @@ const Fornecedor = sequelize.define('Fornecedor', {
         allowNull: false
     }
 });
-
-/*
-Fornecedor.hasMany(Produto, {
-    foreignKey: 'fornecedorId', // Nome da chave estrangeira no Produto
-    as: 'produtos' // Nome do relacionamento (alias)
-});
-*/
 
 module.exports = Fornecedor;

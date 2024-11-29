@@ -2,8 +2,8 @@ const Produto = require('../models/produto');
 const Fornecedor = require('../models/fornecedor');
 
 
-// Cria produto
-/*exports.createProduto = async (req, res) => {
+// Cria produto c fornecedor
+exports.createProduto = async (req, res) => {
     try {
         const { nome, preco, desconto, quantidade, categoria, descricao, fornecedorId} = req.body;
 
@@ -15,14 +15,18 @@ const Fornecedor = require('../models/fornecedor');
             }
         }
 
-        const produto = await Produto.create({ nome, preco, desconto, quantidade, categoria, descricao, fornecedorId });
+        const produto = await Produto.create({ 
+            nome, preco, desconto, quantidade, categoria, descricao, fornecedorId 
+        });
         res.status(201).json(produto);
+        
     } catch (err) {
         console.error('Erro no backend ao criar o produto:', err);
         res.status(500).json({ error: 'Erro ao criar produto', detalhes: err.message });
     }
-};*/
+};
 
+/*
 // Cria produto sem fornecedor
 exports.createProduto = async (req, res) => {
     try {
@@ -35,10 +39,10 @@ exports.createProduto = async (req, res) => {
         res.status(500).json({ error: 'Erro ao criar produto', detalhes: err.message });
     }
 };
-
+*/
 
 // Lista os produtos
-/*exports.getAllProdutos = async (req, res) => {
+exports.getAllProdutos = async (req, res) => {
     try {
         const produtos = await Produto.findAll({
             include: {
@@ -51,19 +55,19 @@ exports.createProduto = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: 'Erro ao listar produtos', detalhes: err.message });
     }
-};*/
+};
 
-exports.getAllProdutos = async (req, res) => {
+/*exports.getAllProdutos = async (req, res) => {
     try {
         const produtos = await Produto.findAll();
         res.status(200).json(produtos);
     } catch (err) {
         res.status(500).json({ error: 'Erro ao listar produtos', detalhes: err.message });
     }
-};
+};*/
 
 // Busca pelo id
-/*exports.getProdutoById = async (req, res) => {
+exports.getProdutoById = async (req, res) => {
     try {
         const produto = await Produto.findByPk(req.params.id, {
             include: {
@@ -79,9 +83,9 @@ exports.getAllProdutos = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: 'Erro ao buscar produto', detalhes: err.message });
     }
-};*/
+};
 
-exports.getProdutoById = async (req, res) => {
+/*exports.getProdutoById = async (req, res) => {
     try {
         const produto = await Produto.findByPk(req.params.id);
         if (!produto) {
@@ -91,7 +95,7 @@ exports.getProdutoById = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: 'Erro ao buscar produto', detalhes: err.message });
     }
-};
+};*/
 
 // Atualiza pelo id
 exports.updateProduto = async (req, res) => {

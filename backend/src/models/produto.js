@@ -1,8 +1,14 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../config/db');
-//const Fornecedor = require('./fornecedor.js');
+const Fornecedor = require('./fornecedor');
 
 const Produto = sequelize.define('Produto', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
     nome: {
         type: DataTypes.STRING,
         allowNull: false
@@ -30,11 +36,11 @@ const Produto = sequelize.define('Produto', {
 });
 
 //RELACIONAR PRODUTO X FORNECEDOR
-/*
+
 Produto.belongsTo(Fornecedor, {
-    foreignKey: 'fornecedorId', // Nome da chave estrangeira
-    as: 'fornecedor' // Nome do relacionamento (alias)
+    constraint: true, 
+    foreignKey: 'fornecedorId', 
+    as: 'fornecedor' 
 });
-*/
 
 module.exports = Produto;
