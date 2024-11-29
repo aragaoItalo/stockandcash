@@ -1,5 +1,5 @@
 const Fornecedor = require('../models/fornecedor');
-//const Produto = require('../models/produto');
+const Produto = require('../models/produto');
 
 //Cria o fornecedor
 exports.createFornecedor = async (req, res) => {
@@ -12,14 +12,14 @@ exports.createFornecedor = async (req, res) => {
     }
 };
 
-// Lista os produtos
-/*exports.getAllFornecedores = async (req, res) => {
+// Lista os fornecedores c seus produtos
+exports.getAllFornecedores = async (req, res) => {
     try {
         const fornecedores = await Fornecedor.findAll({
             include: {
                 model: Produto,
                 as: 'produtos',
-                attributes: ['id', 'nome']
+                attributes: ['id', 'nome', 'preco']
             }
         });
         res.status(200).json(fornecedores);
@@ -27,9 +27,9 @@ exports.createFornecedor = async (req, res) => {
         console.error('Erro ao buscar fornecedores:', err);
         res.status(500).json({ error: 'Erro ao listar fornecedores', detalhes: err.message });
     }
-};*/
+};
 
-exports.getAllFornecedores = async (req, res) => {
+/*exports.getAllFornecedores = async (req, res) => {
     try {
         const fornecedores = await Fornecedor.findAll();
         res.status(200).json(fornecedores);
@@ -37,7 +37,7 @@ exports.getAllFornecedores = async (req, res) => {
         console.error('Erro ao buscar fornecedores:', err);
         res.status(500).json({ error: 'Erro ao listar fornecedores', detalhes: err.message });
     }
-};
+};*/
 
 //Busca pelo id
 /*exports.getFornecedorById = async (req, res) => {

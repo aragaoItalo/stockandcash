@@ -43,4 +43,9 @@ Produto.belongsTo(Fornecedor, {
     as: 'fornecedor' 
 });
 
+Fornecedor.hasMany(Produto,{
+    foreignKey: 'fornecedorId',
+    as: 'produtos'
+})
+
 module.exports = Produto;

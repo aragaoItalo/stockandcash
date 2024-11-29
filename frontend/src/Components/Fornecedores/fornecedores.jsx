@@ -163,7 +163,7 @@ const Fornecedores = () => {
               <th>CNPJ</th>
               <th>Email</th>
               <th>Telefone</th>
-              {/*<th>Produtos</th>*/}
+              <th>Produtos</th>
             </tr>
           </thead>
           <tbody>
@@ -181,19 +181,19 @@ const Fornecedores = () => {
                 <td>{supplier.cnpj}</td>
                 <td>{supplier.email}</td>
                 <td>{supplier.telefone}</td>
-                {/*<td>
+                <td>
                   {supplier.produtos && supplier.produtos.length > 0 ? (
                     <ul>
                       {supplier.produtos.map((product) => (
                         <li key={product.id}>
-                          {product.nome} - {product.preco}
+                          {product.nome} {/*- {product.preco.toFixed(2)}*/}
                         </li>
                       ))}
                     </ul>
                   ) : (
                     <span>Não há produtos registrados</span>
                   )}
-                </td>*/}
+                </td>
               </tr>
             ))}
           </tbody>
