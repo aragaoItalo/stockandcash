@@ -1,8 +1,13 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes,Sequelize } = require('sequelize');
 const sequelize = require('../config/db.js');
 
-
 const Pedido = sequelize.define('Pedido', {
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true
+    },
     cliente: {
       type: DataTypes.STRING,
       allowNull: false,

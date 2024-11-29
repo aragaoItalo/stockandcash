@@ -5,6 +5,7 @@ require('dotenv').config();
 const Cliente = require('./src/models/cliente.js');
 const Fornecedor = require('./src/models/fornecedor.js');
 const Produto = require('./src/models/produto.js');
+const Pedido = require('./src/models/pedido.js')
 
 //Import Pacotes e Módulos
 const express = require('express');
@@ -40,7 +41,7 @@ app.listen(port, () => {
 });
 
 //SINCRONIZAR COM O DB
-sequelize.sync({ alter: true }) //ALTER:TRUE ajustar tabela sem perder dados
+sequelize.sync() //ALTER:TRUE ajustar tabela sem perder dados { alter: true }
     .then(() => {
         console.log('Tabelas sincronizadas com sucesso!');
     })

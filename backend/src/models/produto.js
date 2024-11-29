@@ -1,6 +1,8 @@
 const { DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../config/db');
 const Fornecedor = require('./fornecedor');
+const Pedido = require('./pedido');
+const ItemPedido = require('./itemPedido');
 
 const Produto = sequelize.define('Produto', {
     id: {
@@ -36,7 +38,6 @@ const Produto = sequelize.define('Produto', {
 });
 
 //RELACIONAR PRODUTO X FORNECEDOR
-
 Produto.belongsTo(Fornecedor, {
     constraint: true, 
     foreignKey: 'fornecedorId', 
@@ -46,6 +47,23 @@ Produto.belongsTo(Fornecedor, {
 Fornecedor.hasMany(Produto,{
     foreignKey: 'fornecedorId',
     as: 'produtos'
+});
+
+//RELACIONAR PRODUTO X PEDIDO
+Produto.belongsToMany(Pedido, {
+    through: {
+        model: ItemPedido
+    },
+    foreignKey: 'produtoId',
+    constraint: true
+});
+
+Pedido.belongsToMany(Produto, {
+    through: {
+        model: ItemPedido
+    },
+    foreignKey: "pedidoId",
+    constraint: true
 })
 
 module.exports = Produto;

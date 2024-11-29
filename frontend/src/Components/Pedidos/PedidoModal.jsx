@@ -75,7 +75,7 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
     );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const novoPedido = {
       id: idCounter++,
       cliente,
@@ -90,6 +90,22 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
     };
 
     adicionarPedido(novoPedido);
+    
+    try {
+      const response = await fetch("http://localhost:3000/pedidos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(novoPedido),
+      });
+      if (!response.ok) {
+        throw new Error("Erro ao criar o pedido no backend");
+      }
+    } catch (error) {
+      console.error("Erro ao enviar o pedido para o backend:", error);
+    }
+
     closeModal();
   };
 
@@ -100,12 +116,12 @@ const PedidoModal = ({ closeModal, adicionarPedido, selectedPedido }) => {
 
         {selectedPedido  ? (
           <>
-            <p><strong>ID do Pedido:</strong> {selectedPedido .id}</p>
+            <p><strong>Número do Pedido:</strong> {selectedPedido .id}</p>
             <p><strong>Cliente:</strong> {selectedPedido .cliente}</p>
             <p><strong>Telefone:</strong> {selectedPedido.telefone}</p>
             <p><strong>Endereço:</strong> {selectedPedido.endereco}</p>
             <p><strong>Data:</strong> {selectedPedido .data}</p>
-            <p><strong>Total:</strong> R$ {selectedPedido .total}</p>
+            <p><strong>Total:</strong> R$ {selectedPedido .valorTotal.toFixed(2)}</p>
             <h3>Resumo do Pedido</h3>
             <ul>
               {selectedPedido .produtos.map((produto) => (
