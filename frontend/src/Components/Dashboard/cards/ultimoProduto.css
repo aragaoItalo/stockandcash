@@ -5,7 +5,7 @@
     padding: 20px;
     position: absolute;
     top: 30vh;
-    right: 0.5vw;
+    right: 2vw;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

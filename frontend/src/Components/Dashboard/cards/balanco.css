@@ -1,0 +1,52 @@
+.balanco-container {
+    position: absolute;
+    top: 22vh;
+    left: 13vw;
+    display: flex;
+    flex-direction: row; /* Organiza os itens lado a lado */
+    justify-content: space-between; /* Se você quiser distribuir os itens igualmente */
+    align-items: center; /* Alinha os itens no centro verticalmente */
+    gap: 80px;
+
+}
+
+span {
+    font-size: 1.2rem;
+}
+
+/* Definindo flexbox para centralizar ícone e texto */
+.dinheiro-container,
+.crescente-container,
+.decrescente-container {
+    display: flex;
+    align-items: center; /* Alinha o ícone e o texto verticalmente no centro */
+    justify-content: center; /* Garante que o texto fique centralizado em relação ao ícone */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 150px;
+    height: 40px;
+    font-size: 1.2rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+}
+
+.dinheiro-container:hover,
+.crescente-container:hover,
+.decrescente-container:hover {
+    transform: scale(1.05);  /* Expande o container */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);  /* Aumenta a sombra para dar destaque */
+}
+
+.dinheiro-container {
+    color: green;
+}
+
+.crescente-container {
+    color: rgb(0, 123, 224);
+}
+
+.decrescente-container {
+    color: rgb(206, 16, 16);
+}
